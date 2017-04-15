@@ -1,6 +1,7 @@
 /**
  * TCSS 360 - Iteration 1: Product v0.1
  */
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -39,7 +40,8 @@ public class UserTest {
     @Test
     public void testPassword() {
         String pw = "superSecret";
-        assertEquals(pw.toCharArray(), myUser.getPassword());
+        System.out.println();
+        assertArrayEquals(pw.toCharArray(), myUser.getPassword());
     }
 
     /**
