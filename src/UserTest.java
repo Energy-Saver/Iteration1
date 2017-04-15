@@ -10,8 +10,12 @@ import org.junit.Test;
 /**
  * Tests of the User class.
  *
- * @author Keegan Kell keeganjk@uw.edu
- * @version 11 October 2016
+ * @author Alex Smith
+ * @author Darren Carpenter
+ * @author Nikolai Carlson
+ * @author Keegan Kell
+ * @author Lola Howell
+ * @version 16 April 2016 - Iteration 1
  */
 public class UserTest {
     /** A User to use in the tests. */

@@ -142,7 +142,7 @@ public class EnergySaverMenuBar extends JMenuBar {
         JOptionPane.showMessageDialog(frame, p, "Signup", JOptionPane.QUESTION_MESSAGE);
         //System.out.println(username.getText());
 
-        //build method container or something for users - example only !!!!!!!!!!
+        //build arraylist, map<User, data>, or something for users - example only !!!!!!!!!!
         User firstUser = new User(username.getText(), password.getPassword());
         System.out.println(firstUser);
 
@@ -411,7 +411,7 @@ public class EnergySaverMenuBar extends JMenuBar {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                JOptionPane.showMessageDialog(null,  ABOUT_PROGRAM, "About",
+                JOptionPane.showMessageDialog(null,  ABOUT_PROGRAM, "About Energy Saver",
                                               JOptionPane.PLAIN_MESSAGE, ROLLER);
             }
         });
