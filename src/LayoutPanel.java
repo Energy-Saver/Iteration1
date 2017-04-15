@@ -23,7 +23,7 @@ import javax.swing.event.MouseInputAdapter;
  * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration1
+ * @version 16 April 2016 - Iteration 1
  */
 public class LayoutPanel extends JPanel {
     /**

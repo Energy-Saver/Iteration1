@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration1: PowerPaint
+ * TCSS 360 - Iteration 1: Product v0.1
  */
 import java.awt.EventQueue;
 
@@ -14,7 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration1
+ * @version 16 April 2016 - Iteration 1
  */
 public final class EnergySaverMain {
 

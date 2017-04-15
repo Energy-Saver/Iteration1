@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration1: PowerPaint
+ * TCSS 360 - Iteration 1: Product v0.1
  */
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
@@ -14,11 +14,11 @@ import javax.swing.JToolBar;
  * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration1
+ * @version 16 April 2016 - Iteration 1
  */
 public class EnergySaverToolBar extends JToolBar {
     /**
-     * Generated serialVersionUID.
+     * Fake serialVersionUID to squelch warning.
      */
     private static final long serialVersionUID = 1000491896841625204L;
 

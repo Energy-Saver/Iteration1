@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration1: PowerPaint
+ * TCSS 360 - Iteration 1: Product v0.1
  */
 import java.awt.Color;
 import java.awt.Component;
@@ -15,7 +15,7 @@ import javax.swing.Icon;
  * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration1
+ * @version 16 April 2016 - Iteration 1
  */
 public class ColorIcon implements Icon {
     /** Icon Height. */

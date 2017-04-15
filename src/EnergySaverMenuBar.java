@@ -1,6 +1,8 @@
 /**
- * TCSS 360 - Iteration1: PowerPaint
+ * TCSS 360 - Iteration 1: Product v0.1
  */
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,15 +15,23 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JColorChooser;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+//import javax.swing.event.AncestorEvent;
+//import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -36,11 +46,11 @@ import javax.swing.event.ChangeListener;
  * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration1
+ * @version 16 April 2016 - Iteration 1
  */
 public class EnergySaverMenuBar extends JMenuBar {
     /**
-     * Generated serialVersionUID.
+     * Fake serialVersionUID to squelch warning.
      */
     private static final long serialVersionUID = -1717799894208755241L;
 
@@ -104,6 +114,40 @@ public class EnergySaverMenuBar extends JMenuBar {
         add(buildHelpMenu());
     }
 
+////////////////////////////////////////////////////////////////////////////
+    private void showSignup(JFrame frame) {
+        JPanel p = new JPanel(new BorderLayout(5,5));
+
+        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
+        labels.add(new JLabel("User Name", SwingConstants.RIGHT));
+        labels.add(new JLabel("Password", SwingConstants.RIGHT));
+        p.add(labels, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+        JTextField username = new JTextField();
+        //actionlistener vs just username.getText() below...?
+        /*username.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String textFieldValue = username.getText();
+            }
+        });*/
+        controls.add(username);
+        JPasswordField password = new JPasswordField();
+        //password.addAncestorListener(new RequestFocusListener(false));
+        controls.add(password);
+        p.add(controls, BorderLayout.CENTER);
+
+        //LayoutManager l = new GroupLayout(p);
+        //p.setLayout(l);
+        JOptionPane.showMessageDialog(frame, p, "Signup", JOptionPane.QUESTION_MESSAGE);
+        //System.out.println(username.getText());
+
+        //build method container or something for users - example only !!!!!!!!!!
+        User firstUser = new User(username.getText(), password.getPassword());
+        System.out.println(firstUser);
+
+    }
+
     /**
      * Builds/returns file menu.
      *
@@ -113,6 +157,27 @@ public class EnergySaverMenuBar extends JMenuBar {
     private JMenu buildFileMenu(final JFrame theFrame) {
         final JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
+
+        final JMenuItem signupItem = new JMenuItem("Signup");
+        signupItem.setMnemonic(KeyEvent.VK_S);
+        signupItem.addActionListener(new ActionListener() {
+
+            /**
+             * Clears previous shapes upon clear menuItem event.
+             *
+             * @param theEvent clear menuItem event
+             */
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                //JOptionPane.showInputDialog(null, "Enter your first name:","Signup",
+                //                            JOptionPane.QUESTION_MESSAGE);
+                showSignup(theFrame);
+            }
+        });
+
+        fileMenu.add(signupItem);
+
+        fileMenu.addSeparator();
 
         final JMenuItem loginItem = new JMenuItem("Login");
         loginItem.setMnemonic(KeyEvent.VK_L);
