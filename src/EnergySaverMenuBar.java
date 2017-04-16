@@ -59,7 +59,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     /** Description about the program. */
     private static final String ABOUT_PROGRAM = "TCSS 360\n"
                                               + "Software Development & Quality Assurance Techniques\n"
-                                              + "SPRING 2016\n\n"
+                                              + "SPRING 2017\n\n"
                                               + "DEVELOPED AND DESIGNED BY\n"
                                               + "Alex Smith - developer\n"
                                               + "Darren Carpenter - front-end developer\n"
