@@ -30,8 +30,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-//import javax.swing.event.AncestorEvent;
-//import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -114,38 +112,33 @@ public class EnergySaverMenuBar extends JMenuBar {
         add(buildHelpMenu());
     }
 
-////////////////////////////////////////////////////////////////////////////
+    /**
+     * Shows signup dialog box to collect name & email, part of file menu items.
+     *
+     * @param frame the frame (might not be needed)/////////////////////////////////////////
+     */
     private void showSignup(JFrame frame) {
         JPanel p = new JPanel(new BorderLayout(5,5));
 
         JPanel labels = new JPanel(new GridLayout(0,1,2,2));
-        labels.add(new JLabel("User Name", SwingConstants.RIGHT));
-        labels.add(new JLabel("Password", SwingConstants.RIGHT));
+        labels.add(new JLabel("First Name:", SwingConstants.RIGHT));
+        labels.add(new JLabel("Email:", SwingConstants.RIGHT));
         p.add(labels, BorderLayout.WEST);
 
         JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-        JTextField username = new JTextField();
-        //actionlistener vs just username.getText() below...?
-        /*username.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String textFieldValue = username.getText();
-            }
-        });*/
-        controls.add(username);
-        JPasswordField password = new JPasswordField();
-        //password.addAncestorListener(new RequestFocusListener(false));
-        controls.add(password);
+
+        JTextField userName = new JTextField();
+        JTextField userEmail = new JTextField();
+        controls.add(userName);
+        controls.add(userEmail);
+
         p.add(controls, BorderLayout.CENTER);
 
-        //LayoutManager l = new GroupLayout(p);
-        //p.setLayout(l);
         JOptionPane.showMessageDialog(frame, p, "Signup", JOptionPane.QUESTION_MESSAGE);
-        //System.out.println(username.getText());
 
-        //build arraylist, map<User, data>, or something for users - example only !!!!!!!!!!
-        User firstUser = new User(username.getText(), password.getPassword());
+        //build data structure for added users somewhere - example only//////////////////////
+        User firstUser = new User(userName.getText(), userEmail.getText());
         System.out.println(firstUser);
-
     }
 
     /**

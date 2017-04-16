@@ -16,15 +16,15 @@ public class User {
     /** User's first name. */
     private String myFirstName;
 
-    /** User's password. */
-    private char[] myPassword;
+    /** User's email. */
+    private String myEmail;
 
     /**
      * Constructs the user.
      */
-    public User(String theFirstName, char[] thePassword) {
+    public User(String theFirstName, String theEmail) {
         myFirstName = theFirstName;
-        myPassword = thePassword;
+        myEmail = theEmail;
     }
 
     /**
@@ -37,13 +37,12 @@ public class User {
     }
 
     /**
-     * For testing only, delete before deployment!
-     * Returns password of user.
+     * Returns email of user.
      *
-     * @return first name of user
+     * @return email of user
      */
-    public char[] getPassword() {
-        return myPassword;
+    public String getEmail() {
+        return myEmail;
     }
 
     /**
@@ -56,11 +55,8 @@ public class User {
         final StringBuilder sb = new StringBuilder(85);
         sb.append("[First Name: ");
         sb.append(myFirstName);
-        //remove later!!!!!!!
-        sb.append(", Password: ");
-        for (char c : myPassword) {
-            sb.append(c);
-        }
+        sb.append(", Email: ");
+        sb.append(myEmail);
         sb.append(']');
         return sb.toString();
     }

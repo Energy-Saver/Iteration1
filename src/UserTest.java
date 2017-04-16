@@ -26,8 +26,7 @@ public class UserTest {
      */
     @Before
     public void setUp() { // @throws exception (not needed)
-        String pw = "superSecret";
-        myUser = new User("John Doe", pw.toCharArray());
+        myUser = new User("John Doe", "johndoe@gmail.com");
     }
 
     /**
@@ -39,14 +38,22 @@ public class UserTest {
     }
 
     /**
-     * Test method for default user constructed password.
+     * Test method for default user constructed email.
      */
     @Test
-    public void testPassword() {
-        String pw = "superSecret";
-        System.out.println();
-        assertArrayEquals(pw.toCharArray(), myUser.getPassword());
+    public void testEmail() {
+        assertEquals("johndoe@gmail.com", myUser.getEmail());
     }
+
+    /*
+     * Test method for default user constructed password.
+     */
+    //@Test
+    //public void testPassword() {
+    //    String pw = "superSecret";
+    //    System.out.println();
+    //    assertArrayEquals(pw.toCharArray(), myUser.getPassword());
+    //}
 
     /**
      * Test method for {@link User#toString()}.
@@ -54,7 +61,7 @@ public class UserTest {
     @Test
     public void testToString() {
         assertEquals("toString() produced an unexpedted result!",
-                     "[First Name: John Doe, Password: superSecret]",
+                     "[First Name: John Doe, Email: johndoe@gmail.com]",
                      myUser.toString());
     }
 }
