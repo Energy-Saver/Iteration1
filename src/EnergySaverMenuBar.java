@@ -61,7 +61,7 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "Software Development & Quality Assurance Techniques\n"
                                               + "SPRING 2017\n\n"
                                               + "DEVELOPED AND DESIGNED BY\n"
-                                              + "Alex Smith - developer\n"
+                                              + "Alex R. Smith - developer\n"
                                               + "Darren Carpenter - front-end developer\n"
                                               + "Nikolai Carlson - developer\n"
                                               + "Keegan Kell - developer\n"
