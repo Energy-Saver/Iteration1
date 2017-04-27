@@ -64,7 +64,7 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "Alex R. Smith - developer\n"
                                               + "Darren Carpenter - front-end developer\n"
                                               + "Nikolai Carlson - developer\n"
-                                              + "Keegan Kell - developer\n"
+                                              + "Keegan J. Kell - developer\n"
                                               + "Lola Howell - UX design / front-end developer\n\n"
                                               + "GNU Licensed Icon from: \n"
                                               + "http://icons.iconarchive.com";
