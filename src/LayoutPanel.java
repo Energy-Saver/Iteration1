@@ -1,19 +1,15 @@
 /**
  * TCSS 360 - Iteration1: PowerPaint
  */
-import java.awt.BasicStroke;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.event.MouseInputAdapter;
 
 /**
  * The JPanel upon which everything will be painted.

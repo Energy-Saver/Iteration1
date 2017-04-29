@@ -2,16 +2,10 @@
  * TCSS 360 - Iteration 1: Product v0.1
  */
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -46,7 +40,7 @@ public class EnergySaverGUI {
      * Sets up the GUI.
      */
     private void setup() {
-        final EnergySaverToolBar toolBar = new EnergySaverToolBar();
+        //final EnergySaverToolBar toolBar = new EnergySaverToolBar();
         final LayoutPanel panel = new LayoutPanel();
         final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, panel);
 

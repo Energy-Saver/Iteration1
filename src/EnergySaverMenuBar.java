@@ -15,7 +15,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,13 +22,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -53,7 +50,6 @@ public class EnergySaverMenuBar extends JMenuBar {
     private static final long serialVersionUID = -1717799894208755241L;
 
     /** Paint roller icon for JFrame icon and about message dialog. */
-    //private static final Icon ROLLER = new ImageIcon("icons/roller.png");
     private static final Icon ROLLER = new ImageIcon("estar-large-icon.png");
 
     /** Description about the program. */
