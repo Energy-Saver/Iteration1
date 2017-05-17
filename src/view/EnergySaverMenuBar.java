@@ -82,7 +82,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     private final JSlider mySlider;
 
     /** Tools menu on the menu bar, contains the various tools. */
-    private final JMenu myToolsMenu;
+    //private final JMenu myToolsMenu;
 
     /**
      * Constructs the menu bar.
@@ -95,7 +95,7 @@ public class EnergySaverMenuBar extends JMenuBar {
         myPanel = thePanel;
         mySlider = new JSlider(SwingConstants.HORIZONTAL, 0, myPanel.getMaxStrokeSize(),
                              myPanel.getStrokeSize());
-        myToolsMenu = new JMenu("Tools");
+        //myToolsMenu = new JMenu("Tools");
 
         setup(theFrame);
     }
@@ -108,7 +108,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     private void setup(final JFrame theFrame) {
         add(buildFileMenu(theFrame));
         add(buildOptionsMenu());
-        add(myToolsMenu);
+        //add(myToolsMenu);
         add(buildHelpMenu());
     }
 
@@ -148,7 +148,7 @@ public class EnergySaverMenuBar extends JMenuBar {
      * @return a "file" menu with some menu items
      */
     private JMenu buildFileMenu(final JFrame theFrame) {
-        final JMenu fileMenu = new JMenu("File");
+        final JMenu fileMenu = new JMenu("Account");
         fileMenu.setMnemonic(KeyEvent.VK_F);
 
         final JMenuItem signupItem = new JMenuItem("Signup");
@@ -156,9 +156,9 @@ public class EnergySaverMenuBar extends JMenuBar {
         signupItem.addActionListener(new ActionListener() {
 
             /**
-             * Clears previous shapes upon clear menuItem event.
+             * Signup menuItem event.
              *
-             * @param theEvent clear menuItem event
+             * @param theEvent signup menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
@@ -177,9 +177,9 @@ public class EnergySaverMenuBar extends JMenuBar {
         loginItem.addActionListener(new ActionListener() {
 
             /**
-             * Clears previous shapes upon clear menuItem event.
+             * Login menuItem event.
              *
-             * @param theEvent clear menuItem event
+             * @param theEvent login menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
@@ -194,9 +194,9 @@ public class EnergySaverMenuBar extends JMenuBar {
         logoutItem.addActionListener(new ActionListener() {
 
             /**
-             * Clears previous shapes upon clear menuItem event.
+             * Logout menuItem event.
              *
-             * @param theEvent clear menuItem event
+             * @param theEvent logout menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
@@ -205,25 +205,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         });
 
         fileMenu.add(logoutItem);
-
-        fileMenu.addSeparator();
-
-        final JMenuItem clearItem = new JMenuItem("Clear");
-        clearItem.setMnemonic(KeyEvent.VK_C);
-        clearItem.addActionListener(new ActionListener() {
-
-            /**
-             * Clears previous shapes upon clear menuItem event.
-             *
-             * @param theEvent clear menuItem event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                //clear needed?
-            }
-        });
-
-        fileMenu.add(clearItem);
 
         fileMenu.addSeparator();
 
@@ -424,7 +405,7 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JRadioButtonMenuItem createdButton = new JRadioButtonMenuItem(theAction);
         final ButtonGroup toolButtonGroup = new ButtonGroup();
         toolButtonGroup.add(createdButton);
-        myToolsMenu.add(createdButton);
+        //myToolsMenu.add(createdButton);
     }
 
     /**
@@ -434,7 +415,7 @@ public class EnergySaverMenuBar extends JMenuBar {
      */
     @Override
     public String toString() {
-        return "File|Options|Tools|Help";
+        return "Account|Options|Help";
     }
 
 }
