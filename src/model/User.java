@@ -2,6 +2,8 @@
  * TCSS 360 - Iteration 1: Product v0.1
  */
 
+package model;
+
 /**
  * The user.
  *
