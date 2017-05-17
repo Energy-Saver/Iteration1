@@ -6,6 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -52,7 +53,7 @@ public class EnergySaverGUI {
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
-            myFrame.setIconImage(ImageIO.read(new File("estar-small-icon.png")));
+            myFrame.setIconImage(ImageIO.read(new File("icons/estar-small-icon.png")));
         } catch (final IOException e) {
             e.printStackTrace();
         }
