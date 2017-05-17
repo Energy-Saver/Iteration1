@@ -16,16 +16,21 @@ public class Group {
 	private static final String FILENAME = "exportTest.txt";
 	
 	private User myCurrentUser;
-	private List<User> myGroup;
+	private List<User> myUsers;
 	
 	public Group() {
 		myCurrentUser = null;
-		myGroup = new ArrayList<User>();
+		myUsers = new ArrayList<User>();
+	}
+	
+	public void signUp(User theUser) {
+		myUsers.add(theUser);
+		//signIn(theUser.getFirstName(), theUser.getEmail());
 	}
 	
 	public void signUp(String theFirstName, String theEmail) {
 		User newUser = new User(theFirstName, theEmail);
-		myGroup.add(newUser);
+		myUsers.add(newUser);
 		signIn(newUser.getFirstName(), newUser.getEmail());
 	}
 	
@@ -34,7 +39,7 @@ public class Group {
 	}
 	
 	private User getUser(String theFirstName, String theEmail) {
-		for (User u : myGroup) {
+		for (User u : myUsers) {
 			if (u.getFirstName().equals(theFirstName) && u.getEmail().equals(theEmail)) {
 				return u;
 			}
@@ -48,9 +53,10 @@ public class Group {
 	
 	public void exportGroup() {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
-			for (User u : myGroup) {
+			for (User u : myUsers) {
 				bw.write(u.getFirstName() + ' ' + u.getEmail());
 				bw.newLine();
+				//System.out.println(u.getFirstName() + ' ' + u.getEmail());
 			}
 			System.out.println("Done");
 		} catch (IOException e) {

@@ -80,6 +80,8 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /** Slider used in the thickness subMenu for stroke size. */
     private final JSlider mySlider;
+    
+    private Group myGroup;
 
     /** Tools menu on the menu bar, contains the various tools. */
     //private final JMenu myToolsMenu;
@@ -96,6 +98,7 @@ public class EnergySaverMenuBar extends JMenuBar {
         mySlider = new JSlider(SwingConstants.HORIZONTAL, 0, myPanel.getMaxStrokeSize(),
                              myPanel.getStrokeSize());
         //myToolsMenu = new JMenu("Tools");
+        myGroup = new Group();
 
         setup(theFrame);
     }
@@ -138,7 +141,10 @@ public class EnergySaverMenuBar extends JMenuBar {
 
         //build data structure for added users somewhere - example only//////////////////////
         User firstUser = new User(userName.getText(), userEmail.getText());
-        System.out.println(firstUser);
+        System.out.println(firstUser.getFirstName());
+        System.out.println(firstUser.getEmail());
+        //myGroup.signUp(firstUser.getFirstName(), firstUser.getEmail());
+        myGroup.signUp(firstUser);
     }
 
     /**
@@ -238,10 +244,27 @@ public class EnergySaverMenuBar extends JMenuBar {
 
         optionsMenu.add(createThicknessMenu());
 
-        optionsMenu.add(buildDrawColorChooser("Draw Color...", myPanel.getMyDrawColor()));
-        optionsMenu.add(buildFillColorChooser("Fill Color...", myPanel.getMyFillColor()));
+        optionsMenu.add(buildDrawColorChooser("Import Group", myPanel.getMyDrawColor()));
+        optionsMenu.add(buildFillColorChooser("Export Group", myPanel.getMyFillColor()));
 
         optionsMenu.addSeparator();
+        
+        final JMenuItem imp = new JMenuItem("Export Group");
+        imp.addActionListener(new ActionListener() {
+
+            /**
+             * Action listener for color chooser, updates draw color based on user selection.
+             *
+             * @param theEvent draw color chooser event
+             */
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                myGroup.exportGroup();
+            }
+        });
+        
+        optionsMenu.add(imp);
+        
 
         final JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem("Fill", true);
         checkBox.setToolTipText("When checked, drawn shapes are filled");
