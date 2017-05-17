@@ -1,8 +1,10 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -10,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class Group {
 	
@@ -48,7 +51,18 @@ public class Group {
 	}
 	
 	public void importGroup() {
-		
+		try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				StringTokenizer st = new StringTokenizer(line);
+				while() {
+					
+				}
+			}
+			System.out.println("Import Complete");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void exportGroup() {
@@ -56,9 +70,8 @@ public class Group {
 			for (User u : myUsers) {
 				bw.write(u.getFirstName() + ' ' + u.getEmail());
 				bw.newLine();
-				//System.out.println(u.getFirstName() + ' ' + u.getEmail());
 			}
-			System.out.println("Done");
+			System.out.println("Export Complete");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

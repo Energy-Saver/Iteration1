@@ -139,12 +139,7 @@ public class EnergySaverMenuBar extends JMenuBar {
 
         JOptionPane.showMessageDialog(frame, p, "Signup", JOptionPane.QUESTION_MESSAGE);
 
-        //build data structure for added users somewhere - example only//////////////////////
-        User firstUser = new User(userName.getText(), userEmail.getText());
-        System.out.println(firstUser.getFirstName());
-        System.out.println(firstUser.getEmail());
-        //myGroup.signUp(firstUser.getFirstName(), firstUser.getEmail());
-        myGroup.signUp(firstUser);
+        myGroup.signUp(userName.getText(), userEmail.getText());
     }
 
     /**
