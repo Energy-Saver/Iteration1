@@ -7,18 +7,13 @@ import model.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -26,13 +21,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * Class PowerPaintMenuBar is a menu bar for program EnergySaver.
@@ -69,18 +59,11 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "GNU Licensed Icon from: \n"
                                               + "http://icons.iconarchive.com";
 
-    /** Large tick mark spacing value for stroke width. */
-    private static final int MAJOR_TICK_SPACING = 5;
-
-    /** Small tick mark spacing value for stroke width. */
-    private static final int MINOR_TICK_SPACING = 1;
-
-    /** Panel reference (used to pass menuBar values to the panel). */
+    /** Panel reference (used to pass menuBar values to the panel).
+     *  Needed for passing myGroup to panel? */
     private final LayoutPanel myPanel;
-
-    /** Slider used in the thickness subMenu for stroke size. */
-    private final JSlider mySlider;
     
+    /** Similar to creating the board in Tetris.*/
     private Group myGroup;
 
     /** Tools menu on the menu bar, contains the various tools. */
@@ -95,9 +78,6 @@ public class EnergySaverMenuBar extends JMenuBar {
     public EnergySaverMenuBar(final JFrame theFrame, final LayoutPanel thePanel) {
         super();
         myPanel = thePanel;
-        mySlider = new JSlider(SwingConstants.HORIZONTAL, 0, myPanel.getMaxStrokeSize(),
-                             myPanel.getStrokeSize());
-        //myToolsMenu = new JMenu("Tools");
         myGroup = new Group();
 
         setup(theFrame);
@@ -141,6 +121,41 @@ public class EnergySaverMenuBar extends JMenuBar {
 
         myGroup.signUp(userName.getText(), userEmail.getText());
     }
+    
+    /**
+     * Shows login dialog box to retrieve name & email, part of file menu items.
+     *
+     * @param frame the frame (might not be needed)/////////////////////////////////////////
+     */
+    private void showLogin(JFrame frame) {
+        JPanel p = new JPanel(new BorderLayout(5,5));
+
+        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
+        labels.add(new JLabel("First Name:", SwingConstants.RIGHT));
+        labels.add(new JLabel("Email:", SwingConstants.RIGHT));
+        p.add(labels, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+
+        JTextField userName = new JTextField();
+        JTextField userEmail = new JTextField();
+        controls.add(userName);
+        controls.add(userEmail);
+
+        p.add(controls, BorderLayout.CENTER);
+
+        JOptionPane.showMessageDialog(frame, p, "Login", JOptionPane.QUESTION_MESSAGE);
+
+        myGroup.login(userName.getText(), userEmail.getText());
+        
+        if (myGroup.getUser(userName.getText(), userEmail.getText()) == null) {
+        	System.out.printf("User %s does not exist with email %s.\n", 
+        					  userName.getText(), userEmail.getText());
+        } else {
+        	System.out.printf("User %s logged in succesfully.\n", 
+					  		  userName.getText(), userEmail.getText());
+        }
+    }
 
     /**
      * Builds/returns file menu.
@@ -157,14 +172,12 @@ public class EnergySaverMenuBar extends JMenuBar {
         signupItem.addActionListener(new ActionListener() {
 
             /**
-             * Signup menuItem event.
+             * SignUp menuItem event.
              *
-             * @param theEvent signup menuItem event
+             * @param theEvent signUp menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                //JOptionPane.showInputDialog(null, "Enter your first name:","Signup",
-                //                            JOptionPane.QUESTION_MESSAGE);
                 showSignup(theFrame);
             }
         });
@@ -184,7 +197,7 @@ public class EnergySaverMenuBar extends JMenuBar {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                //do login stuff
+                showLogin(theFrame);
             }
         });
 
@@ -201,7 +214,9 @@ public class EnergySaverMenuBar extends JMenuBar {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                //do logout stuff
+            	String name = myGroup.getCurrentUserName();
+                myGroup.logout();
+                System.out.printf("User %s logged out, goodbye.\n", name);
             }
         });
 
@@ -236,16 +251,23 @@ public class EnergySaverMenuBar extends JMenuBar {
     private JMenu buildOptionsMenu() {
         final JMenu optionsMenu = new JMenu("Options");
         optionsMenu.setMnemonic(KeyEvent.VK_O);
-
-        optionsMenu.add(createThicknessMenu());
-
-        optionsMenu.add(buildDrawColorChooser("Import Group", myPanel.getMyDrawColor()));
-        optionsMenu.add(buildFillColorChooser("Export Group", myPanel.getMyFillColor()));
-
-        optionsMenu.addSeparator();
         
-        final JMenuItem imp = new JMenuItem("Export Group");
+        final JMenuItem imp = new JMenuItem("Import Group");
         imp.addActionListener(new ActionListener() {
+
+            /**
+             * Action listener for color chooser, updates draw color based on user selection.
+             *
+             * @param theEvent draw color chooser event
+             */
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                myGroup.importGroup();
+            }
+        });
+        
+        final JMenuItem exp = new JMenuItem("Export Group");
+        exp.addActionListener(new ActionListener() {
 
             /**
              * Action listener for color chooser, updates draw color based on user selection.
@@ -259,128 +281,9 @@ public class EnergySaverMenuBar extends JMenuBar {
         });
         
         optionsMenu.add(imp);
-        
-
-        final JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem("Fill", true);
-        checkBox.setToolTipText("When checked, drawn shapes are filled");
-        checkBox.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
-                                                       KeyEvent.CTRL_DOWN_MASK));
-        checkBox.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for checkBox, updates isFilled property.
-             *
-             * @param theEvent checkBox event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                if (checkBox.isSelected()) {
-                    myPanel.setIsFilled(true);
-                } else { //check box not selected
-                    myPanel.setIsFilled(false);
-                }
-            }
-        });
-
-        optionsMenu.add(checkBox);
+        optionsMenu.add(exp);
 
         return optionsMenu;
-    }
-
-    /**
-     * Builds/returns draw color chooser.
-     *
-     * @param theName name for the chooser dialog
-     * @param theColor color to initially set the draw color chooser
-     * @return draw color chooser
-     */
-    private JMenuItem buildDrawColorChooser(final String theName, final Color theColor) {
-        final JMenuItem colorChooserItem = new JMenuItem(theName);
-        colorChooserItem.setMnemonic(KeyEvent.getExtendedKeyCodeForChar(theName.charAt(0)));
-        final ColorIcon customIcon = new ColorIcon(theColor);
-        colorChooserItem.setIcon(customIcon);
-        colorChooserItem.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                final Color result = JColorChooser.showDialog(null, theName,
-                                                              myPanel.getMyDrawColor());
-                if (result != null) {
-                    myPanel.setDrawColor(result);
-                    customIcon.setColor(result);
-                }
-            }
-        });
-
-        return colorChooserItem;
-    }
-
-    /**
-     * Builds/returns fill color chooser.
-     *
-     * @param theName name for the chooser dialog
-     * @param theColor color to initially set the fill color chooser
-     * @return fill color chooser
-     */
-    private JMenuItem buildFillColorChooser(final String theName, final Color theColor) {
-        final JMenuItem colorChooserItem = new JMenuItem(theName);
-        colorChooserItem.setMnemonic(KeyEvent.getExtendedKeyCodeForChar(theName.charAt(0)));
-        final ColorIcon customIcon = new ColorIcon(theColor);
-        colorChooserItem.setIcon(customIcon);
-        colorChooserItem.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates fill color based on user selection.
-             *
-             * @param theEvent fill color chooser event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                final Color result = JColorChooser.showDialog(null, theName,
-                                                              myPanel.getMyFillColor());
-                if (result != null) {
-                    myPanel.setFillColor(result);
-                    customIcon.setColor(result);
-                }
-            }
-        });
-
-        return colorChooserItem;
-    }
-
-      /**
-       * Create/returns thickness subMenu with slider for stroke size.
-       *
-       * @return subMenu containing a thickness slider
-       */
-    private JMenu createThicknessMenu() {
-        final JMenu subMenu = new JMenu("Thickness");
-        subMenu.setMnemonic(KeyEvent.VK_T);
-        mySlider.setMajorTickSpacing(MAJOR_TICK_SPACING);
-        mySlider.setMinorTickSpacing(MINOR_TICK_SPACING);
-        mySlider.setPaintLabels(true);
-        mySlider.setPaintTicks(true);
-        mySlider.addChangeListener(new ChangeListener() {
-
-            /**
-             * Change listener for slider, updates stroke size based on slider's value.
-             *
-             * @param theEvent slider selection change
-             */
-            @Override
-            public void stateChanged(final ChangeEvent theEvent) {
-                myPanel.setStrokeSize(mySlider.getValue());
-            }
-        });
-
-        subMenu.add(mySlider);
-
-        return subMenu;
     }
 
     /**
@@ -411,19 +314,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         helpMenu.add(aboutItem);
 
         return helpMenu;
-    }
-
-    /**
-     * Creates a radio button menu item, associates an action with the button,
-     * adds the button to a button group, adds the button to the Tool menu.
-     *
-     * @param theAction the Action to associate with the new button being created
-     */
-    public void createToolMenuButton(final Action theAction) {
-        final JRadioButtonMenuItem createdButton = new JRadioButtonMenuItem(theAction);
-        final ButtonGroup toolButtonGroup = new ButtonGroup();
-        toolButtonGroup.add(createdButton);
-        //myToolsMenu.add(createdButton);
     }
 
     /**

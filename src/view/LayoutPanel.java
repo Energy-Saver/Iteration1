@@ -4,7 +4,6 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -49,9 +48,6 @@ public class LayoutPanel extends JPanel {
     /** The color to fill shapes with. */
     private Color myFillColor;
 
-    /** The state of the fill checkBox. */
-    private boolean myFillFlag;
-
     /** The stroke size used for drawing. */
     private int myStrokeSize;
 
@@ -62,7 +58,6 @@ public class LayoutPanel extends JPanel {
         super();
         myDrawColor = UW_PURPLE;
         myFillColor = UW_GOLD;
-        myFillFlag = true;
         myStrokeSize = DEFAULT_STROKE;
 
         setup();
@@ -74,7 +69,6 @@ public class LayoutPanel extends JPanel {
     private void setup() {
         setPreferredSize(DEFAULT_SIZE);
         setBackground(Color.WHITE);
-        setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
     }
 
     /**
@@ -129,15 +123,6 @@ public class LayoutPanel extends JPanel {
      */
     public void setFillColor(final Color theFillColor) {
         myFillColor = theFillColor;
-    }
-
-    /**
-     * Sets flag based on passed value specifying the state of the fill checkBox.
-     *
-     * @param theFillFlag the state of the fill checkBox
-     */
-    public void setIsFilled(final boolean theFillFlag) {
-        myFillFlag = theFillFlag;
     }
 
     /**

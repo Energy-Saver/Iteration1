@@ -2,14 +2,9 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -26,6 +21,14 @@ public class Group {
 		myUsers = new ArrayList<User>();
 	}
 	
+	public String getCurrentUserName() {
+		if (myCurrentUser != null) {
+			return myCurrentUser.getFirstName();
+		} else {
+			return "";
+		}
+	}
+	
 	public void signUp(User theUser) {
 		myUsers.add(theUser);
 		//signIn(theUser.getFirstName(), theUser.getEmail());
@@ -34,14 +37,18 @@ public class Group {
 	public void signUp(String theFirstName, String theEmail) {
 		User newUser = new User(theFirstName, theEmail);
 		myUsers.add(newUser);
-		signIn(newUser.getFirstName(), newUser.getEmail());
+		login(newUser.getFirstName(), newUser.getEmail());
 	}
 	
-	public void signIn(String theFirstName, String theEmail) {
+	public void login(String theFirstName, String theEmail) {
 		myCurrentUser = getUser(theFirstName, theEmail);
 	}
 	
-	private User getUser(String theFirstName, String theEmail) {
+	public void logout() {
+		myCurrentUser = null;
+	}
+	
+	public User getUser(String theFirstName, String theEmail) {
 		for (User u : myUsers) {
 			if (u.getFirstName().equals(theFirstName) && u.getEmail().equals(theEmail)) {
 				return u;
@@ -55,11 +62,9 @@ public class Group {
 			String line;
 			while ((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line);
-				while() {
-					
-				}
+				myUsers.add(new User(st.nextToken(), st.nextToken()));
 			}
-			System.out.println("Import Complete");
+			System.out.printf("Import Complete: %d users imported.\n", myUsers.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +76,7 @@ public class Group {
 				bw.write(u.getFirstName() + ' ' + u.getEmail());
 				bw.newLine();
 			}
-			System.out.println("Export Complete");
+			System.out.printf("Export Complete: %d users exported.\n", myUsers.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
