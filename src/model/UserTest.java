@@ -1,6 +1,9 @@
 /**
  * TCSS 360 - Iteration 1: Product v0.1
  */
+
+package model;
+
 //import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
