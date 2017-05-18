@@ -25,7 +25,7 @@ public class Group {
 		if (myCurrentUser != null) {
 			return myCurrentUser.getFirstName();
 		} else {
-			return "";
+			return null;
 		}
 	}
 	
@@ -55,6 +55,10 @@ public class Group {
 			}
 		}
 		return null; //no user found with those credentials
+	}
+	
+	public int groupSize() {
+		return myUsers.size();
 	}
 	
 	public void importGroup() {
