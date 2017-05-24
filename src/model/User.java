@@ -4,6 +4,8 @@
 
 package model;
 
+import java.util.List;
+
 /**
  * The user.
  *
@@ -20,6 +22,12 @@ public class User {
 
     /** User's email. */
     private String myEmail;
+    
+    /** User's currently in-use project. */
+    private Project myCurrentProject;
+    
+    /** User's projects. */
+    private List<Project> myProjects;
 
     /**
      * Constructs the user.
@@ -27,6 +35,27 @@ public class User {
     public User(String theFirstName, String theEmail) {
         myFirstName = theFirstName;
         myEmail = theEmail;
+        myProjects = null;
+    }
+    
+    //returns -1 if project name used previously, make GUI re-prompt for project name if 0 received.
+    //loads newly created project as well
+    public int createNewProject(String theProjectName) {
+    	if (myProjects.contains(theProjectName)) {
+    		return -1;
+    	}
+    	myCurrentProject = new Project(theProjectName);
+    	myProjects.add(myCurrentProject);
+    	return 0;
+    }
+    
+    //if not found returns -1, returns 0 if success
+    public int loadProject(String theProject) {
+    	if (myProjects.indexOf(theProject) == -1) {
+    		return -1;
+    	}
+    	myCurrentProject = myProjects.get(myProjects.indexOf(theProject));
+    	return 0;
     }
 
     /**

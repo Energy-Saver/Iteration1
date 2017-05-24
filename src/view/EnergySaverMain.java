@@ -3,6 +3,7 @@
  */
 package view;
 
+import model.*;
 import java.awt.EventQueue;
 
 import javax.swing.UIManager;
@@ -59,7 +60,17 @@ public final class EnergySaverMain {
                 new EnergySaverGUI();
             }
         });
+        
+        User u1 = new User("Keegan", "keegankell@gmail.com");
+        u1.createNewProject("proj1");
 
+        Project p1 = new Project("First Project");
+        System.out.println(p1);
+        System.out.printf("Old cost per year: %f\n", p1.oldAnnualCost());
+        System.out.printf("New cost per year: %f\n", p1.newAnnualCost());
+        System.out.printf("Return per year: %f\n", p1.returnPerYear());
+        System.out.printf("Payoff years:: %f\n", p1.payoffYears());
+        
     }
 
     /**
