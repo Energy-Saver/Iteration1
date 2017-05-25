@@ -31,7 +31,7 @@ public class Group {
 	
 	public void signUp(User theUser) {
 		myUsers.add(theUser);
-		//signIn(theUser.getFirstName(), theUser.getEmail());
+		login(theUser.getFirstName(), theUser.getEmail());
 	}
 	
 	public void signUp(String theFirstName, String theEmail) {
@@ -46,6 +46,10 @@ public class Group {
 	
 	public void logout() {
 		myCurrentUser = null;
+	}
+	
+	public User getCurrentUser() {
+		return myCurrentUser;
 	}
 	
 	public User getUser(String theFirstName, String theEmail) {

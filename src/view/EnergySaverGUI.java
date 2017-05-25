@@ -3,7 +3,12 @@
  */
 package view;
 
+import model.*;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -29,12 +34,15 @@ public class EnergySaverGUI {
 
     /** The window for this GUI. */
     private final JFrame myFrame;
+    
+    private Group myGroup;
 
     /**
      * Constructs the Graphical User Interface and sets the frame title.
      */
     public EnergySaverGUI() {
         myFrame = new JFrame(TITLE);
+        myGroup = new Group();
         setup();
     }
 
@@ -43,8 +51,18 @@ public class EnergySaverGUI {
      */
     private void setup() {
         //final EnergySaverToolBar toolBar = new EnergySaverToolBar();
-        final LayoutPanel panel = new LayoutPanel();
-        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, panel);
+    	myGroup.signUp("Keegan", "lumen@ous.com");
+        myGroup.getCurrentUser().createNewProject("first project");
+        
+        final ProjectPanel panel = new ProjectPanel(myFrame, myGroup);
+        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, panel, myGroup);
+        
+        panel.addComponentListener(new ComponentAdapter() {
+        	@Override
+        	public void componentResized(ComponentEvent e) {
+        		panel.repaint();
+        	}
+        });
 
         myFrame.setJMenuBar(menuBar);
         //myFrame.add(toolBar, BorderLayout.SOUTH);
@@ -60,6 +78,7 @@ public class EnergySaverGUI {
         myFrame.pack();
         myFrame.setLocationRelativeTo(null); // change to better center
         myFrame.setVisible(true);
+        myFrame.setMinimumSize(new Dimension(600, 400));
     }
 
     /**

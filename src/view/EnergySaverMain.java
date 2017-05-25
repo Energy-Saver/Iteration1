@@ -61,15 +61,17 @@ public final class EnergySaverMain {
             }
         });
         
-        User u1 = new User("Keegan", "keegankell@gmail.com");
+        User u1 = new User("Keegan", "lumen@ous.com");
         u1.createNewProject("proj1");
 
-        Project p1 = new Project("First Project");
-        System.out.println(p1);
-        System.out.printf("Old cost per year: %f\n", p1.oldAnnualCost());
-        System.out.printf("New cost per year: %f\n", p1.newAnnualCost());
-        System.out.printf("Return per year: %f\n", p1.returnPerYear());
-        System.out.printf("Payoff years:: %f\n", p1.payoffYears());
+        //Project p1 = new Project("First Project");
+        //System.out.println(p1);
+        u1.getProject().setProjectName("Uno");
+        System.out.printf("Project Name: %s\n", u1.getProject().getProjectName());
+        //System.out.printf("Old cost per year: %f\n", u1.get.currentAnnualCost());
+        //System.out.printf("New cost per year: %f\n", p1.replacementAnnualCost());
+        //System.out.printf("Return per year: %f\n", p1.returnPerYear());
+        //System.out.printf("Payoff years:: %f\n", p1.payoffYears());
         
     }
 

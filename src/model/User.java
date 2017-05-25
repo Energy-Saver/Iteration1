@@ -4,6 +4,7 @@
 
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,11 @@ public class User {
     public User(String theFirstName, String theEmail) {
         myFirstName = theFirstName;
         myEmail = theEmail;
-        myProjects = null;
+        myProjects = new ArrayList<Project>();
+    }
+    
+    public Project getProject() {
+    	return myCurrentProject;
     }
     
     //returns -1 if project name used previously, make GUI re-prompt for project name if 0 received.
@@ -74,6 +79,10 @@ public class User {
      */
     public String getEmail() {
         return myEmail;
+    }
+    
+    public String getProjectName() {
+    	return myCurrentProject.getProjectName();
     }
 
     /**

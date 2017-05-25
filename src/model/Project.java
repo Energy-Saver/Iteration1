@@ -29,6 +29,66 @@ public class Project {
 
       setupBulbs();
    }
+   
+   public String getProjectName() {
+	   return myProjectName;
+   }
+   
+   public String getCurrentBulbType() {
+	   return myCurrentBulbType;
+   }
+   
+   public String getReplacementBulbType() {
+	   return myReplacementBulbType;
+   }
+   
+   public int getNumberOfBulbs() {
+	   return myNumberOfBulbs;
+   }
+   
+   public int getNumberDaysPerWeek() {
+	   return myNumberDaysPerWeek;
+   }
+   
+   public double getElectricRate() {
+	   return myElectricRate;
+   }
+   
+   public double getReplacementBulbCost() {
+	   return myReplacementBulbCost;
+   }
+   
+   public void setProjectName(String thisProjectName) {
+	   myProjectName = thisProjectName;
+   }
+   
+   public void setCurrentBulbType(String theCurrentBulbType) {
+	   //if is legal bulb type
+	   myCurrentBulbType = theCurrentBulbType;
+   }
+   
+   public void setReplacementBulbType(String theReplacementBulbType) {
+	   //same
+	   myReplacementBulbType = theReplacementBulbType;
+   }
+   
+   public void setNumberOfBulbs(int theNumberOfBulbs) {
+	   //check if positive
+	   myNumberOfBulbs = theNumberOfBulbs;
+   }
+   
+   public void setNumberDaysPerWeek(int theNumberDaysPerWeek) {
+	   myNumberDaysPerWeek = theNumberDaysPerWeek;
+   }
+   
+   public void setElectricRate(double theElectricRate) {
+	   //check something
+	   myElectricRate = theElectricRate;
+   }
+   
+   public void setReplacementBulbCost(double theReplacementBulbCost) {
+	   myReplacementBulbCost = theReplacementBulbCost;
+   }
 
    public void setupBulbs() {
       myBulbs = new HashMap<String, Integer>();
@@ -38,20 +98,24 @@ public class Project {
       }
    }
 
-   public double oldAnnualCost() {
+   public double currentAnnualCost() {
 	   return annualCost(myCurrentBulbType);
    }
 
-   public double newAnnualCost() {
+   public double replacementAnnualCost() {
 	   return annualCost(myReplacementBulbType);
    }
    
    public double returnPerYear() {
-	   return oldAnnualCost() - newAnnualCost();
+	   return currentAnnualCost() - replacementAnnualCost();
    }
    
    public double payoffYears() {
 	   return (myNumberOfBulbs * myReplacementBulbCost) / returnPerYear();
+   }
+   
+   public double initialCost() {
+	   return myNumberOfBulbs * myReplacementBulbCost;
    }
    
    private double annualCost(String theBulbType) {

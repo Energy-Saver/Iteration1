@@ -61,7 +61,7 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /** Panel reference (used to pass menuBar values to the panel).
      *  Needed for passing myGroup to panel? */
-    private final LayoutPanel myPanel;
+    private final ProjectPanel myPanel;
     
     /** Similar to creating the board in Tetris.*/
     private Group myGroup;
@@ -75,7 +75,7 @@ public class EnergySaverMenuBar extends JMenuBar {
      * @param theFrame b
      * @param thePanel b
      */
-    public EnergySaverMenuBar(final JFrame theFrame, final LayoutPanel thePanel) {
+    public EnergySaverMenuBar(final JFrame theFrame, final ProjectPanel thePanel, Group theGroup) {
         super();
         myPanel = thePanel;
         myGroup = new Group();
@@ -91,7 +91,6 @@ public class EnergySaverMenuBar extends JMenuBar {
     private void setup(final JFrame theFrame) {
         add(buildFileMenu(theFrame));
         add(buildOptionsMenu());
-        //add(myToolsMenu);
         add(buildHelpMenu());
     }
 
