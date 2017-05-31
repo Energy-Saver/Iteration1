@@ -27,14 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * The JPanel upon which everything will be painted.
- *
- * @author Alex Smith
- * @author Darren Carpenter
- * @author Nikolai Carlson
- * @author Keegan Kell
- * @author Lola Howell
- * @version 16 April 2016 - Iteration 1
+ * DEPRECATED __________________________________________________________ DEPRECATED
  */
 public class ProjectPanel extends JPanel {
     /**

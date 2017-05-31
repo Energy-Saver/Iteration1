@@ -29,6 +29,10 @@ public class Group {
 		}
 	}
 	
+	public void guestUser() {
+		myCurrentUser = new User("guest", "null@void.com");
+	}
+	
 	public void signUp(User theUser) {
 		myUsers.add(theUser);
 		login(theUser.getFirstName(), theUser.getEmail());

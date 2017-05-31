@@ -49,30 +49,30 @@ public class EnergySaverGUI {
      * Sets up the GUI.
      */
     private void setup() {
-        //final EnergySaverToolBar toolBar = new EnergySaverToolBar();
-    	myGroup.signUp("Keegan", "lumen@ous.com");
-        myGroup.getCurrentUser().createNewProject("first project");
+    	//myGroup.signUp("Keegan", "lumen@ous.com");
+        //myGroup.getCurrentUser().createNewProject("first project");
         
-        final StartPanel sp = new StartPanel(myFrame, myGroup);
-        final ProjectPanel pp = new ProjectPanel(myFrame, myGroup);
-        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, sp, pp, myGroup);
+        //final ProjectPanel pp = new ProjectPanel(myFrame, myGroup);
+        final StartPanel sp = new StartPanel(myFrame, myGroup/*, pp*/);
+        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, myGroup);
         
+        myFrame.add(sp);
+        /*
         sp.addComponentListener(new ComponentAdapter() {
         	@Override
         	public void componentResized(ComponentEvent e) {
         		sp.repaint();
         	}
-        });
+        });*/
         
-        pp.addComponentListener(new ComponentAdapter() {
+        /*pp.addComponentListener(new ComponentAdapter() {
         	@Override
         	public void componentResized(ComponentEvent e) {
         		pp.repaint();
         	}
-        });
+        });*/
 
         myFrame.setJMenuBar(menuBar);
-        //myFrame.add(toolBar, BorderLayout.SOUTH);
         //myFrame.add(panel, BorderLayout.CENTER);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -86,6 +86,7 @@ public class EnergySaverGUI {
         myFrame.setLocationRelativeTo(null); // change to better center
         myFrame.setVisible(true);
         myFrame.setMinimumSize(new Dimension(600, 400));
+        myFrame.setResizable(false);
     }
 
     /**
