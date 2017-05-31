@@ -53,13 +53,21 @@ public class EnergySaverGUI {
     	myGroup.signUp("Keegan", "lumen@ous.com");
         myGroup.getCurrentUser().createNewProject("first project");
         
-        final ProjectPanel panel = new ProjectPanel(myFrame, myGroup);
-        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, panel, myGroup);
+        final StartPanel sp = new StartPanel(myFrame, myGroup);
+        final ProjectPanel pp = new ProjectPanel(myFrame, myGroup);
+        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, sp, pp, myGroup);
         
-        panel.addComponentListener(new ComponentAdapter() {
+        sp.addComponentListener(new ComponentAdapter() {
         	@Override
         	public void componentResized(ComponentEvent e) {
-        		panel.repaint();
+        		sp.repaint();
+        	}
+        });
+        
+        pp.addComponentListener(new ComponentAdapter() {
+        	@Override
+        	public void componentResized(ComponentEvent e) {
+        		pp.repaint();
         	}
         });
 
