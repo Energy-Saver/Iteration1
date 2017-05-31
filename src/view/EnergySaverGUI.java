@@ -5,7 +5,6 @@ package view;
 
 import model.*;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -66,7 +65,7 @@ public class EnergySaverGUI {
 
         myFrame.setJMenuBar(menuBar);
         //myFrame.add(toolBar, BorderLayout.SOUTH);
-        myFrame.add(panel, BorderLayout.CENTER);
+        //myFrame.add(panel, BorderLayout.CENTER);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
