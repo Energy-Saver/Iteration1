@@ -58,6 +58,8 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "Lola Howell - UX design / front-end developer\n\n"
                                               + "GNU Licensed Icon from: \n"
                                               + "http://icons.iconarchive.com";
+    
+    private final JFrame myFrame;
 
     /** Panel reference (used to pass menuBar values to the panel).
      *  Needed for passing myGroup to panel? */
@@ -77,8 +79,12 @@ public class EnergySaverMenuBar extends JMenuBar {
      */
     public EnergySaverMenuBar(final JFrame theFrame, final ProjectPanel thePanel, Group theGroup) {
         super();
+        myFrame = theFrame;
         myPanel = thePanel;
         myGroup = new Group();
+        myFrame.add(myPanel);
+        myFrame.remove(myPanel);
+        myFrame.add(myPanel);
 
         setup(theFrame);
     }
