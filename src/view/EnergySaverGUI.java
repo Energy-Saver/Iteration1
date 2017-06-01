@@ -54,7 +54,7 @@ public class EnergySaverGUI {
         
         //final ProjectPanel pp = new ProjectPanel(myFrame, myGroup);
         final StartPanel sp = new StartPanel(myFrame, myGroup/*, pp*/);
-        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, myGroup);
+        final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, myGroup, sp);
         
         myFrame.add(sp);
         /*

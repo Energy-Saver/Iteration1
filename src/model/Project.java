@@ -8,9 +8,13 @@ public class Project {
    public static final int[] BULB_WATTAGES = {60, 14, 8};
 
    private String myProjectName;
+   
    private Map<String, Integer> myBulbs;
    private String myCurrentBulbType;
    private String myReplacementBulbType;
+   private int myCurrentBulbWatts;
+   private int myReplacementBulbWatts;
+   
    private int myNumberOfBulbs;
    private int myHoursUsedPerDay;
    private int myNumberDaysPerWeek;
@@ -67,14 +71,26 @@ public class Project {
 	   myCurrentBulbType = theCurrentBulbType;
    }
    
+   public void setCurrentBulbWatts(int theCurrentBulbWatts) {
+	   myCurrentBulbWatts = theCurrentBulbWatts;
+   }
+   
    public void setReplacementBulbType(String theReplacementBulbType) {
 	   //same
 	   myReplacementBulbType = theReplacementBulbType;
    }
    
+   public void setReplacementBulbWatts(int theReplacementBulbWatts) {
+	   myReplacementBulbWatts = theReplacementBulbWatts;
+   }
+   
    public void setNumberOfBulbs(int theNumberOfBulbs) {
 	   //check if positive
 	   myNumberOfBulbs = theNumberOfBulbs;
+   }
+   
+   public void setHoursUsedPerDay(int theHoursUsedPerDay) {
+	   myHoursUsedPerDay = theHoursUsedPerDay;
    }
    
    public void setNumberDaysPerWeek(int theNumberDaysPerWeek) {
@@ -125,13 +141,17 @@ public class Project {
    }
 
    public String toString() {
-      StringBuilder sb = new StringBuilder(75);
+      StringBuilder sb = new StringBuilder(80);
       
       sb.append(myProjectName);
       sb.append('[');
       sb.append(myCurrentBulbType);
       sb.append("->");
       sb.append(myReplacementBulbType);
+      sb.append(", ");
+      sb.append(myCurrentBulbWatts);
+      sb.append("->");
+      sb.append(myReplacementBulbWatts);
       sb.append(", #: ");
       sb.append(myNumberOfBulbs);
       sb.append(", h/d: ");

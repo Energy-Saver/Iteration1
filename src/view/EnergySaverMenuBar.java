@@ -6,6 +6,7 @@ package view;
 import model.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,7 +65,7 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /** Panel reference (used to pass menuBar values to the panel).
      *  Needed for passing myGroup to panel? */
-    //private final ProjectPanel myProjectPanel;
+    private StartPanel myStartPanel;
     
     /** Similar to creating the board in Tetris.*/
     private Group myGroup;
@@ -78,11 +79,10 @@ public class EnergySaverMenuBar extends JMenuBar {
      * @param theFrame b
      * @param thePanel b
      */
-    public EnergySaverMenuBar(final JFrame theFrame, Group theGroup) {
+    public EnergySaverMenuBar(final JFrame theFrame, Group theGroup, StartPanel theStartPanel) {
         super();
         myFrame = theFrame;
-        //myStartPanel = theSP;
-        //myProjectPanel = thePP;
+        myStartPanel = theStartPanel;
         myGroup = theGroup;
         
         //playing with the panels - needs start 1st
@@ -224,9 +224,31 @@ public class EnergySaverMenuBar extends JMenuBar {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
+            	/*
             	String name = myGroup.getCurrentUserName();
+            	myFrame.getPanel().removeAll();
+            	JPanel blank = new JPanel();
+            	blank.setBackground(Color.WHITE);
+            	myFrame.add(blank);
+            	revalidate();
+            	repaint();
+            	StartPanel sp = new StartPanel(myFrame, myGroup);
+            	myFrame.add(sp);
                 myGroup.logout();
-                System.out.printf("User %s logged out, goodbye.\n", name);
+                System.out.printf("User %s logged out, goodbye.\n", name);*/
+            	
+            	//myStartPanel.removeAll();
+            	//repaint();
+            	
+            	
+            	//myStartPanel.myPanel = "start";
+            	//myStartPanel.removeAll();
+            	//myStartPanel.revalidate();
+            	//myStartPanel.repaint();
+            	myStartPanel.restart();
+            	
+            	
+            	//myStartPanel = new StartPanel(myFrame, myGroup);
             }
         });
 

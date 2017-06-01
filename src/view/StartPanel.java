@@ -3,6 +3,8 @@
  */
 package view;
 
+//https://pixabay.com/en/arrow-dashed-pattern-colorful-2207745/
+
 import model.*;
 
 import java.awt.BorderLayout;
@@ -46,23 +48,21 @@ public class StartPanel extends JPanel {
    
     private JFrame myFrame;
     private Group myGroup;
-    //private ProjectPanel myProjectPanel;
     private BufferedImage myImage;
-    private String myPanel;
+    public String myPanel;
     private JPanel mySouthPanel;
     private JButton myToggledButton;
 
     /**
      * Constructs PaintPanel with default values and sets up the panel.
      */
-    public StartPanel(JFrame theFrame, Group theGroup/*, ProjectPanel theProjectPanel*/) {
+    public StartPanel(JFrame theFrame, Group theGroup) {
         super();
 
         myFrame = theFrame;
         myGroup = theGroup;
         myPanel = "start";
         mySouthPanel = new JPanel();;
-        //myProjectPanel = theProjectPanel;
 
         setup();
     }
@@ -186,6 +186,13 @@ public class StartPanel extends JPanel {
         return b;
     }
     
+    protected void restart() {
+    	myPanel = "start";
+    	removeAll();
+    	revalidate();
+    	repaint();
+    }
+    
     /**
      * Shows login dialog box to retrieve name & email, part of file menu items.
      */
@@ -255,11 +262,27 @@ public class StartPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                              RenderingHints.VALUE_ANTIALIAS_ON);
         
+        int panelW = (int) (myFrame.getWidth() / 2.0);
+        int panelH = (int) (myFrame.getHeight() / 2.0);
+        
         if (myPanel.equals("start")) {
+        	File f = new File("icons/title.png");
+            try {
+                myImage = ImageIO.read(f);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         	g2d.drawImage(myImage, 25, 25, this);
-        } else if (myPanel.equals("newProject")){
-        	int panelW = (int) (myFrame.getWidth() / 2.0);
-            int panelH = (int) (myFrame.getHeight() / 2.0);
+        }else if (myPanel.equals("newProject")){
+        	File f = new File("icons/blurArrow.png");
+            try {
+                myImage = ImageIO.read(f);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        	g2d.drawImage(myImage, panelW + 25, 0, this);
+        } else if (myPanel.equals("showResult")){
+        	add(new DrawChart(g2d, myFrame, myGroup));
             
             int graphW = panelW - 2 * MARGIN;
             int graphH = (int) (panelH - MARGIN - PERCENT_SPACE_BOTTOM * panelH);
@@ -383,36 +406,18 @@ public class StartPanel extends JPanel {
     	bulbWattages2.setSelectedIndex(2);
     	addWattagesActionListener(bulbWattages2);
     	
-    	// Line 3
     	JLabel lblNumBulbs = new JLabel("Number of Light Bulbs");
     	JTextField fieldNumBulbs = new JTextField();
-    	fieldNumBulbs.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-            	int numBulbs = Integer.parseInt(fieldNumBulbs.getText());
-            	myGroup.getCurrentUser().getProject().setNumberOfBulbs(numBulbs);
-            }
-    	});
     	
-    	// Line 4
     	JLabel lblHrsPerDay = new JLabel("Hours Used per Day");
     	JTextField fieldHrsPerDay = new JTextField();
     	
-    	// Line 5
     	JLabel lblDaysWk = new JLabel("Number of Days per Week");
     	JTextField fieldDaysWk = new JTextField();
     	
-    	// Line 6
     	JLabel lblCostKWH = new JLabel("Electricity Cost per KWH");
     	JTextField fieldCostKWH = new JTextField();
     	
-    	// Line 6
     	JLabel lblReplBulbCost = new JLabel("Replacement Bulb Cost");
     	JTextField fieldReplBulbCost = new JTextField();
     	
@@ -428,15 +433,11 @@ public class StartPanel extends JPanel {
     		left.add(labels[i]);
     	}
     	
-    	
     	combosC.add(bulbTypes);
     	combosC.add(bulbWattages);
     	
     	combosR.add(bulbTypes2);
     	combosR.add(bulbWattages2);
-    	
-    	
-    	
     	
     	left.add(lblCurrent);
     	left.add(combosC);
@@ -468,10 +469,67 @@ public class StartPanel extends JPanel {
     	left.add(blank);
     	
     	JButton bCalculate = createButton("Calculate");
+    	bCalculate.addActionListener(new ActionListener() {
+
+            /**
+             * Action listener for color chooser, updates draw color based on user selection.
+             *
+             * @param theEvent draw color chooser event
+             */
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+            	String currentType = (String) bulbTypes.getSelectedItem();
+            	int currentWatts = (int) bulbWattages.getSelectedItem();
+            	
+            	String replacementType = (String) bulbTypes2.getSelectedItem();
+            	int replacementWatts = (int) bulbWattages2.getSelectedItem();
+            	
+            	int numBulbs = Integer.parseInt(fieldNumBulbs.getText());
+            	int numHours = Integer.parseInt(fieldHrsPerDay.getText());
+            	int numDays = Integer.parseInt(fieldDaysWk.getText());
+            	double numRate = Double.parseDouble(fieldCostKWH.getText());
+            	double numRepl = Double.parseDouble(fieldReplBulbCost.getText());
+            	
+            	myGroup.getCurrentUser().getProject().setCurrentBulbType(currentType);
+            	myGroup.getCurrentUser().getProject().setCurrentBulbWatts(currentWatts);
+            	myGroup.getCurrentUser().getProject().setReplacementBulbType(replacementType);
+            	myGroup.getCurrentUser().getProject().setReplacementBulbWatts(replacementWatts);
+            	
+            	myGroup.getCurrentUser().getProject().setNumberOfBulbs(numBulbs);
+            	myGroup.getCurrentUser().getProject().setHoursUsedPerDay(numHours);
+            	myGroup.getCurrentUser().getProject().setNumberDaysPerWeek(numDays);
+            	myGroup.getCurrentUser().getProject().setElectricRate(numRate);
+            	myGroup.getCurrentUser().getProject().setReplacementBulbCost(numRepl);
+            	
+            	myPanel = "showResult";
+            	modifyResultUI(left, bCalculate);
+            	System.out.println(myGroup.getCurrentUser().getProject());
+            }
+    	});
     	left.add(bCalculate);
     	
     	
     	add(left);
+    }
+    
+    private void modifyResultUI(Container theContainer, JButton theFirstButton) {
+    	theContainer.remove(theFirstButton);
+    	//theContainer.removeAll();
+    	
+    	//enableHistory();
+    	
+    	//theContainer.remove(theSecondButton);
+    	JButton discard = createButton("Discard");
+    	JButton save = createButton("Save Project");
+    	Container c = new Container();
+    	mySouthPanel = new JPanel();
+    	revalidate();
+    	repaint();
+    	setLayout(new BorderLayout());
+    	mySouthPanel.add(discard);
+    	mySouthPanel.add(save);
+    	mySouthPanel.setBackground(Color.WHITE);
+    	add(mySouthPanel, BorderLayout.SOUTH);
     }
     
     private void addBulbsActionListener(JComboBox<String> theComboBox) {
@@ -484,9 +542,9 @@ public class StartPanel extends JPanel {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	@SuppressWarnings("unchecked")
-				JComboBox<String> cb = (JComboBox<String>)theEvent.getSource();
-                String type = (String)cb.getSelectedItem();
+            	//@SuppressWarnings("unchecked")
+				//JComboBox<String> cb = (JComboBox<String>)theEvent.getSource();
+                //String type = (String)cb.getSelectedItem();
             }
         });
     }
@@ -501,10 +559,10 @@ public class StartPanel extends JPanel {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	@SuppressWarnings("unchecked")
-				JComboBox<Integer> cb = (JComboBox<Integer>)theEvent.getSource();
-                int wattage = (int) cb.getSelectedItem();
-                System.out.println(wattage);
+            	//@SuppressWarnings("unchecked")
+				//JComboBox<Integer> cb = (JComboBox<Integer>)theEvent.getSource();
+                //int wattage = (int) cb.getSelectedItem();
+                //System.out.println(wattage);
             }
         });
     }
