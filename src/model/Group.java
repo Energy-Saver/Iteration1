@@ -30,7 +30,13 @@ public class Group {
 	}
 	
 	public void guestUser() {
-		myCurrentUser = new User("guest", "null@void.com");
+		if (myUsers.isEmpty()) {
+			System.out.println("guest user created");
+			myCurrentUser = new User("guest", "null@void.com");
+		} else {
+			System.out.println("logged in guest");
+			login("guest", "null@void.com");
+		}
 	}
 	
 	public void signUp(User theUser) {
@@ -48,7 +54,15 @@ public class Group {
 		myCurrentUser = getUser(theFirstName, theEmail);
 	}
 	
+	private void removeGuest() {
+		myUsers.remove(getUser("guest", "null@void.com"));
+	}
+	
 	public void logout() {
+		myCurrentUser.deleteProject(); //save protects project, logout must delete displayed
+		if (myCurrentUser.getFirstName().equals("guest")) {
+			removeGuest();
+		}
 		myCurrentUser = null;
 	}
 	

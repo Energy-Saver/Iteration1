@@ -246,6 +246,8 @@ public class EnergySaverMenuBar extends JMenuBar {
             	//myStartPanel.revalidate();
             	//myStartPanel.repaint();
             	myStartPanel.restart();
+            	myGroup.getCurrentUser().deleteProject();
+            	myGroup.logout();
             	
             	
             	//myStartPanel = new StartPanel(myFrame, myGroup);

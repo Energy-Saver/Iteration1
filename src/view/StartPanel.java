@@ -139,6 +139,7 @@ public class StartPanel extends JPanel {
     private void addNewProjectListener(JButton theButton) {
     	if (theButton.getText().equals("Continue")) {
     		myGroup.guestUser();
+    		System.out.println("contineued, guestUser created");
     	}
     	
     	theButton.addActionListener(new ActionListener() {
@@ -155,6 +156,7 @@ public class StartPanel extends JPanel {
                 myPanel = "newProject";
                 repaint();
                 System.out.println(myGroup.getCurrentUser());
+                System.out.println("group size: " + myGroup.groupSize());
                 myGroup.getCurrentUser().createNewProject("dos"); // CORRECT
                 
                 addNewProjectComponents();
@@ -166,17 +168,19 @@ public class StartPanel extends JPanel {
     }
     
     private void enableHistory() {
-    	JButton bLoad = createButton("Load Project");
-    	JButton bNew = createButton("New Project");
-    	addNewProjectListener(bNew);
-    	mySouthPanel = new JPanel();
-    	removeAll();
-    	revalidate();
-    	repaint();
-    	mySouthPanel.add(bLoad);
-    	mySouthPanel.add(bNew);
-    	mySouthPanel.setBackground(Color.WHITE);
-    	add(mySouthPanel, BorderLayout.SOUTH);
+    	if (myGroup.getCurrentUser() != null && !myGroup.getCurrentUser().getFirstName().equals("guest")) {
+    		JButton bLoad = createButton("Load Project");
+    		JButton bNew = createButton("New Project");
+    		addNewProjectListener(bNew);
+    		mySouthPanel = new JPanel();
+    		removeAll();
+    		revalidate();
+    		repaint();
+    		mySouthPanel.add(bLoad);
+    		mySouthPanel.add(bNew);
+    		mySouthPanel.setBackground(Color.WHITE);
+    		add(mySouthPanel, BorderLayout.SOUTH);
+    	}
     }
     
     private JButton createButton(String theLabel) {
@@ -189,6 +193,16 @@ public class StartPanel extends JPanel {
     protected void restart() {
     	myPanel = "start";
     	removeAll();
+    	mySouthPanel = new JPanel();
+    	System.out.println("current user: " + myGroup.getCurrentUser());
+    	if (myGroup.getCurrentUser() != null && !myGroup.getCurrentUser().getFirstName().equals("guest")) {
+    		enableHistory();
+    		//addStartComponents();
+    	} else if (myGroup.getCurrentUser().getFirstName().equals("guest")) {
+    		System.out.println("made it");
+    		addStartComponents();
+    	}
+    	//addStartComponents();
     	revalidate();
     	repaint();
     }
@@ -520,6 +534,21 @@ public class StartPanel extends JPanel {
     	
     	//theContainer.remove(theSecondButton);
     	JButton discard = createButton("Discard");
+    	discard.addActionListener(new ActionListener() {
+
+            /**
+             * Action listener for color chooser, updates draw color based on user selection.
+             *
+             * @param theEvent draw color chooser event
+             */
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+            	restart();
+            	System.out.println("group size: " + myGroup.groupSize());
+            	//myGroup.getCurrentUser().getNumberOfProjects();
+            	//myGroup.getCurrentUser().deleteProject();
+            }
+        });
     	JButton save = createButton("Save Project");
     	Container c = new Container();
     	mySouthPanel = new JPanel();

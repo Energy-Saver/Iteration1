@@ -43,6 +43,16 @@ public class User {
     	return myCurrentProject;
     }
     
+    public int getNumberOfProjects() {
+    	return myProjects.size();
+    }
+    
+    public void deleteProject() {
+    	myProjects.remove(myCurrentProject);
+    	myCurrentProject = null;
+    	System.out.println(myProjects.size());
+    }
+    
     //returns -1 if project name used previously, make GUI re-prompt for project name if 0 received.
     //loads newly created project as well
     public int createNewProject(String theProjectName) {
