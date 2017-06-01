@@ -37,7 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class StartPanel extends JPanel {
-	private static final Color ES_BLUE = new Color(86, 132, 197);
+	private static final Color ES_BLUE = new Color(86, 132, 197); //blue: #5684c5
 	
     /** Default size for this JPanel. */
     private static final Dimension DEFAULT_SIZE = new Dimension(600, 400);
@@ -53,9 +53,6 @@ public class StartPanel extends JPanel {
     private JPanel mySouthPanel;
     private JButton myToggledButton;
 
-    /**
-     * Constructs PaintPanel with default values and sets up the panel.
-     */
     public StartPanel(JFrame theFrame, Group theGroup) {
         super();
 
@@ -67,9 +64,6 @@ public class StartPanel extends JPanel {
         setup();
     }
     
-    /**
-     * Helper method for setting up PaintPanel.
-     */
     private void setup() {
         setPreferredSize(DEFAULT_SIZE);
         setBackground(Color.WHITE);
@@ -82,13 +76,7 @@ public class StartPanel extends JPanel {
             e.printStackTrace();
         }
     }
-    //diy energy saver
-    //what this program is for
-    //if you have an account, login
-    //if you would do not care to save, continue to calculations
-    //if ... signup
-    //picture on left
-    //blue: #5684c5
+
     private void addStartComponents() {
     	setLayout(new BorderLayout());
 
@@ -97,12 +85,6 @@ public class StartPanel extends JPanel {
     	JButton bContinue = createButton("Continue");
     	
     	bLogin.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	if (showLogin()) {
@@ -112,12 +94,6 @@ public class StartPanel extends JPanel {
         });
     	
     	bSignup.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	if (showSignup()) {
@@ -143,12 +119,6 @@ public class StartPanel extends JPanel {
     	}
     	
     	theButton.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
                 removeAll();
@@ -157,12 +127,9 @@ public class StartPanel extends JPanel {
                 repaint();
                 System.out.println(myGroup.getCurrentUser());
                 System.out.println("group size: " + myGroup.groupSize());
-                myGroup.getCurrentUser().createNewProject("dos"); // CORRECT
+                myGroup.getCurrentUser().createNewProject("default"); //change after save
                 
                 addNewProjectComponents();
-                
-                //myFrame.add(new ProjectPanel(myFrame, myGroup)); WRONG-nullPointer
-            	
             }
         });
     }
@@ -194,15 +161,12 @@ public class StartPanel extends JPanel {
     	myPanel = "start";
     	removeAll();
     	mySouthPanel = new JPanel();
-    	System.out.println("current user: " + myGroup.getCurrentUser());
     	if (myGroup.getCurrentUser() != null && !myGroup.getCurrentUser().getFirstName().equals("guest")) {
     		enableHistory();
-    		//addStartComponents();
-    	} else if (myGroup.getCurrentUser().getFirstName().equals("guest")) {
-    		System.out.println("made it");
+    	} else if (myGroup.getCurrentUser() == null || myGroup.getCurrentUser().getFirstName().equals("guest")) {
     		addStartComponents();
     	}
-    	//addStartComponents();
+
     	revalidate();
     	repaint();
     }
@@ -484,12 +448,6 @@ public class StartPanel extends JPanel {
     	
     	JButton bCalculate = createButton("Calculate");
     	bCalculate.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	String currentType = (String) bulbTypes.getSelectedItem();
@@ -522,31 +480,17 @@ public class StartPanel extends JPanel {
     	});
     	left.add(bCalculate);
     	
-    	
     	add(left);
     }
     
     private void modifyResultUI(Container theContainer, JButton theFirstButton) {
     	theContainer.remove(theFirstButton);
-    	//theContainer.removeAll();
-    	
-    	//enableHistory();
-    	
-    	//theContainer.remove(theSecondButton);
     	JButton discard = createButton("Discard");
     	discard.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	restart();
             	System.out.println("group size: " + myGroup.groupSize());
-            	//myGroup.getCurrentUser().getNumberOfProjects();
-            	//myGroup.getCurrentUser().deleteProject();
             }
         });
     	JButton save = createButton("Save Project");
@@ -581,11 +525,6 @@ public class StartPanel extends JPanel {
     private void addWattagesActionListener(JComboBox<Integer> theComboBox) {
     	theComboBox.addActionListener(new ActionListener() {
 
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	//@SuppressWarnings("unchecked")

@@ -57,23 +57,7 @@ public class EnergySaverGUI {
         final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, myGroup, sp);
         
         myFrame.add(sp);
-        /*
-        sp.addComponentListener(new ComponentAdapter() {
-        	@Override
-        	public void componentResized(ComponentEvent e) {
-        		sp.repaint();
-        	}
-        });*/
-        
-        /*pp.addComponentListener(new ComponentAdapter() {
-        	@Override
-        	public void componentResized(ComponentEvent e) {
-        		pp.repaint();
-        	}
-        });*/
-
         myFrame.setJMenuBar(menuBar);
-        //myFrame.add(panel, BorderLayout.CENTER);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {

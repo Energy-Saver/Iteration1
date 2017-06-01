@@ -135,7 +135,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     /**
      * Shows login dialog box to retrieve name & email, part of file menu items.
      *
-     * @param frame the frame (might not be needed)/////////////////////////////////////////
+     * @param frame the frame
      */
     private void showLogin(JFrame frame) {
         JPanel p = new JPanel(new BorderLayout(5,5));
@@ -224,33 +224,10 @@ public class EnergySaverMenuBar extends JMenuBar {
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	/*
-            	String name = myGroup.getCurrentUserName();
-            	myFrame.getPanel().removeAll();
-            	JPanel blank = new JPanel();
-            	blank.setBackground(Color.WHITE);
-            	myFrame.add(blank);
-            	revalidate();
-            	repaint();
-            	StartPanel sp = new StartPanel(myFrame, myGroup);
-            	myFrame.add(sp);
-                myGroup.logout();
-                System.out.printf("User %s logged out, goodbye.\n", name);*/
-            	
-            	//myStartPanel.removeAll();
-            	//repaint();
-            	
-            	
-            	//myStartPanel.myPanel = "start";
-            	//myStartPanel.removeAll();
-            	//myStartPanel.revalidate();
-            	//myStartPanel.repaint();
-            	myStartPanel.restart();
+            	//myStartPanel.restart();
             	myGroup.getCurrentUser().deleteProject();
             	myGroup.logout();
-            	
-            	
-            	//myStartPanel = new StartPanel(myFrame, myGroup);
+            	myStartPanel.restart();
             }
         });
 
@@ -277,11 +254,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         return fileMenu;
     }
 
-    /**
-     * Builds/returns options menu.
-     *
-     * @return an "options" menu with some menu items
-     */
     private JMenu buildOptionsMenu() {
         final JMenu optionsMenu = new JMenu("Options");
         optionsMenu.setMnemonic(KeyEvent.VK_O);
@@ -289,11 +261,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem imp = new JMenuItem("Import Group");
         imp.addActionListener(new ActionListener() {
 
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
                 myGroup.importGroup();
@@ -302,12 +269,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         
         final JMenuItem exp = new JMenuItem("Export Group");
         exp.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
                 myGroup.exportGroup();

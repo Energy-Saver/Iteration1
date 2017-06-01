@@ -59,6 +59,9 @@ public class Group {
 	}
 	
 	public void logout() {
+		if (myCurrentUser == null) {
+			return;
+		}
 		myCurrentUser.deleteProject(); //save protects project, logout must delete displayed
 		if (myCurrentUser.getFirstName().equals("guest")) {
 			removeGuest();
