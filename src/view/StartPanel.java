@@ -385,19 +385,19 @@ public class StartPanel extends JPanel {
     	addWattagesActionListener(bulbWattages2);
     	
     	JLabel lblNumBulbs = new JLabel("Number of Light Bulbs");
-    	JTextField fieldNumBulbs = new JTextField();
+    	JTextField fieldNumBulbs = new JTextField("12");
     	
     	JLabel lblHrsPerDay = new JLabel("Hours Used per Day");
-    	JTextField fieldHrsPerDay = new JTextField();
+    	JTextField fieldHrsPerDay = new JTextField("3");
     	
     	JLabel lblDaysWk = new JLabel("Number of Days per Week");
-    	JTextField fieldDaysWk = new JTextField();
+    	JTextField fieldDaysWk = new JTextField("7");
     	
     	JLabel lblCostKWH = new JLabel("Electricity Cost per KWH");
-    	JTextField fieldCostKWH = new JTextField();
+    	JTextField fieldCostKWH = new JTextField(".08");
     	
     	JLabel lblReplBulbCost = new JLabel("Replacement Bulb Cost");
-    	JTextField fieldReplBulbCost = new JTextField();
+    	JTextField fieldReplBulbCost = new JTextField("49.99");
     	
     	String[] b = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"};
     	JLabel[] labels = new JLabel[b.length];
@@ -489,11 +489,23 @@ public class StartPanel extends JPanel {
     	discard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
+            	myGroup.getCurrentUser().deleteProject();
             	restart();
             	System.out.println("group size: " + myGroup.groupSize());
+            	System.out.println("current user: " + myGroup.getCurrentUser());
+            	System.out.println("current user's # projects: " + myGroup.getCurrentUser().getNumberOfProjects());
             }
         });
     	JButton save = createButton("Save Project");
+    	save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+            	String name = JOptionPane.showInputDialog("Enter project name:");
+            	myGroup.getCurrentUser().getProject().setProjectName(name);
+            	restart();
+            }
+        });
+    	
     	Container c = new Container();
     	mySouthPanel = new JPanel();
     	revalidate();
