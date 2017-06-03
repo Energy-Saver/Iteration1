@@ -24,7 +24,9 @@ public class Project {
    public Project(String theProjectName) {
 	  myProjectName = theProjectName;
       myCurrentBulbType = BULB_TYPES[0];
+      myCurrentBulbWatts = BULB_WATTAGES[0];
       myReplacementBulbType = BULB_TYPES[2];
+      myReplacementBulbWatts = BULB_WATTAGES[2];
       myNumberOfBulbs = 12;
       myHoursUsedPerDay = 4;
       myNumberDaysPerWeek = 7;
@@ -33,6 +35,24 @@ public class Project {
 
       setupBulbs();
    }
+   
+//   public Project(String theProjectName, String theCurrentBulbType, int theCurrentBulbWatts, 
+//		          String theReplacementBulbType, int theReplacementBulbWatts, 
+//		          int theNumberOfBulbs, int theHoursUsedPerDay, int theNumberDaysPerWeek,
+//		          double theElectricRate, double theReplacementBulbCost) {
+//	   myProjectName = theProjectName;
+//	   myCurrentBulbType = theCurrentBulbType;
+//	   myCurrentBulbWatts = theCurrentBulbWatts;
+//	   myReplacementBulbType = BULB_TYPES[2];
+//	   myReplacementBulbWatts = theReplacementBulbWatts;
+//	   myNumberOfBulbs = theNumberOfBulbs;
+//	   myHoursUsedPerDay = theHoursUsedPerDay;
+//	   myNumberDaysPerWeek = theNumberDaysPerWeek;
+//	   myElectricRate = theElectricRate;
+//	   myReplacementBulbCost = theReplacementBulbCost;
+//
+//       setupBulbs();
+//   }
    
    public String getProjectName() {
 	   return myProjectName;
@@ -48,6 +68,10 @@ public class Project {
    
    public int getNumberOfBulbs() {
 	   return myNumberOfBulbs;
+   }
+   
+   public int getHoursUsedPerDay() {
+	   return myHoursUsedPerDay;
    }
    
    public int getNumberDaysPerWeek() {

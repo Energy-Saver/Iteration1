@@ -30,7 +30,7 @@ public class Group {
 	}
 	
 	public void guestUser() {
-		if (myUsers.isEmpty()) {
+		if (myUsers.isEmpty() || !myUsers.contains(getUser("guest", "null@void.com"))) {
 			System.out.println("guest user created");
 			myCurrentUser = new User("guest", "null@void.com");
 		} else {

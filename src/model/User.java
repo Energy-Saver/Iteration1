@@ -47,6 +47,34 @@ public class User {
     	return myProjects.size();
     }
     
+    public boolean contains(String theName) {
+    	for (Project p : myProjects) {
+    		if (p.getProjectName().equals(theName)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    //new, return copy?
+    public List<String> getProjectNames() {
+    	List<String> list = new ArrayList<String>();
+    	for (Project p : myProjects) {
+    		list.add(p.getProjectName());
+    	}
+    	return list;
+    }
+    
+    public void setCurrentProject(String theProjectName) {
+    	for (Project p : myProjects) {
+    		if (p.getProjectName().equals(theProjectName)) {
+    			myCurrentProject = p;
+    			return;
+    		}
+    	}
+    	myCurrentProject = null; //if not found, verify clear field
+    }
+    
     public void deleteProject() {
     	myProjects.remove(myCurrentProject);
     	myCurrentProject = null;

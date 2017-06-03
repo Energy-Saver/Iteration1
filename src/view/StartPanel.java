@@ -23,17 +23,21 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 public class StartPanel extends JPanel {
@@ -51,7 +55,6 @@ public class StartPanel extends JPanel {
     private BufferedImage myImage;
     public String myPanel;
     private JPanel mySouthPanel;
-    private JButton myToggledButton;
 
     public StartPanel(JFrame theFrame, Group theGroup) {
         super();
@@ -101,7 +104,7 @@ public class StartPanel extends JPanel {
             	}
             }
         });
-    	
+
     	addNewProjectListener(bContinue);
     	
     	mySouthPanel.add(bLogin);
@@ -138,6 +141,7 @@ public class StartPanel extends JPanel {
     	if (myGroup.getCurrentUser() != null && !myGroup.getCurrentUser().getFirstName().equals("guest")) {
     		JButton bLoad = createButton("Load Project");
     		JButton bNew = createButton("New Project");
+    		addLoadProjectListener(bLoad);
     		addNewProjectListener(bNew);
     		mySouthPanel = new JPanel();
     		removeAll();
@@ -169,6 +173,48 @@ public class StartPanel extends JPanel {
 
     	revalidate();
     	repaint();
+    }
+    
+    private void addLoadProjectListener(JButton theButton) {
+    	theButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                removeAll();
+                revalidate();
+                myPanel = "newProject";
+                repaint();
+                System.out.println(myGroup.getCurrentUser());
+                
+                DefaultListModel<String> dlm = new DefaultListModel<String>();
+                for (String s : myGroup.getCurrentUser().getProjectNames()) {
+                	dlm.addElement(s);
+                }
+                JList<String> list = new JList<>(dlm);
+                
+                
+                myPanel = "loadSelect";
+                JPanel p = new JPanel();
+                
+                setLayout(new BorderLayout());
+                add(new JScrollPane(list));
+                
+                Container c = new Container();
+                c.setLayout(new FlowLayout());
+                c.add(createButton("Open"));
+                c.add(createButton("Delete"));
+                
+                add(c, BorderLayout.SOUTH);
+                
+                
+                //for (Project p : myGroup.getCurrentUser().getProjects()) {
+                //	System.out.println(p);
+                //}
+                
+                
+                //this should happen after user selects project name
+                //addNewProjectComponents();
+            }
+        });
     }
     
     /**
@@ -251,7 +297,7 @@ public class StartPanel extends JPanel {
                 e.printStackTrace();
             }
         	g2d.drawImage(myImage, 25, 25, this);
-        }else if (myPanel.equals("newProject")){
+        } else if (myPanel.equals("newProject")){
         	File f = new File("icons/blurArrow.png");
             try {
                 myImage = ImageIO.read(f);
@@ -260,7 +306,7 @@ public class StartPanel extends JPanel {
             }
         	g2d.drawImage(myImage, panelW + 25, 0, this);
         } else if (myPanel.equals("showResult")){
-        	add(new DrawChart(g2d, myFrame, myGroup));
+        	//add(new DrawChart(g2d, myFrame, myGroup));
             
             int graphW = panelW - 2 * MARGIN;
             int graphH = (int) (panelH - MARGIN - PERCENT_SPACE_BOTTOM * panelH);
@@ -348,17 +394,17 @@ public class StartPanel extends JPanel {
     	gL.setVgap(10);
     	left.setLayout(gL);
     	
-    	JLabel lblCurrent = new JLabel("Current Light Bulb");
-    	JButton button2 = new JButton("Button 2");
+    	Project p = myGroup.getCurrentUser().getProject();
     	
     	//Line 1
+    	JLabel lblCurrent = new JLabel("Current Light Bulb");
+    	
     	Container combosC = new Container();
     	combosC.setLayout(new GridLayout(0, 2));
     	
     	JComboBox<String> bulbTypes = new JComboBox<String>(Project.BULB_TYPES);
     	bulbTypes.setSelectedIndex(0);
     	addBulbsActionListener(bulbTypes);
-    	
     	
     	JComboBox<Integer> bulbWattages = new JComboBox<Integer>();
     	for (int i : Project.BULB_WATTAGES) {
@@ -385,19 +431,19 @@ public class StartPanel extends JPanel {
     	addWattagesActionListener(bulbWattages2);
     	
     	JLabel lblNumBulbs = new JLabel("Number of Light Bulbs");
-    	JTextField fieldNumBulbs = new JTextField("12");
+    	JTextField fieldNumBulbs = new JTextField(Integer.toString(p.getNumberOfBulbs()));
     	
     	JLabel lblHrsPerDay = new JLabel("Hours Used per Day");
-    	JTextField fieldHrsPerDay = new JTextField("3");
+    	JTextField fieldHrsPerDay = new JTextField(Integer.toString(p.getHoursUsedPerDay()));
     	
     	JLabel lblDaysWk = new JLabel("Number of Days per Week");
-    	JTextField fieldDaysWk = new JTextField("7");
+    	JTextField fieldDaysWk = new JTextField(Integer.toString(p.getNumberDaysPerWeek()));
     	
     	JLabel lblCostKWH = new JLabel("Electricity Cost per KWH");
-    	JTextField fieldCostKWH = new JTextField(".08");
+    	JTextField fieldCostKWH = new JTextField(Double.toString(p.getElectricRate()));
     	
     	JLabel lblReplBulbCost = new JLabel("Replacement Bulb Cost");
-    	JTextField fieldReplBulbCost = new JTextField("49.99");
+    	JTextField fieldReplBulbCost = new JTextField(Double.toString(p.getReplacementBulbCost()));
     	
     	String[] b = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"};
     	JLabel[] labels = new JLabel[b.length];
@@ -481,6 +527,10 @@ public class StartPanel extends JPanel {
     	left.add(bCalculate);
     	
     	add(left);
+    	
+    	//if (myPanel.equals("loadProject")) {
+    	//	bCalculate.doClick();
+    	//} // see: line 178, was "loadProject" but caused left panel to not work
     }
     
     private void modifyResultUI(Container theContainer, JButton theFirstButton) {
@@ -500,13 +550,19 @@ public class StartPanel extends JPanel {
     	save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	String name = JOptionPane.showInputDialog("Enter project name:");
+            	String name = JOptionPane.showInputDialog("Enter project name: ");
+            	//while (myGroup.getCurrentUser().contains(name)) {
+            	//	name = JOptionPane.showInputDialog("Name exists, please choose again: ");
+            	//} //behavior: want saved project to be able to save over loaded w/o rename
+            	while (name.equals("")) {
+            		name = JOptionPane.showInputDialog("Enter project name: ");
+            	}
             	myGroup.getCurrentUser().getProject().setProjectName(name);
             	restart();
             }
         });
     	
-    	Container c = new Container();
+    	//Container c = new Container();
     	mySouthPanel = new JPanel();
     	revalidate();
     	repaint();
