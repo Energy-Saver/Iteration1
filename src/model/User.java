@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,6 +80,20 @@ public class User {
     	myProjects.remove(myCurrentProject);
     	myCurrentProject = null;
     	System.out.println(myProjects.size());
+    }
+    
+    public void deleteProject(String theProject) {
+    	Iterator<Project> i = myProjects.iterator();
+    	while (i.hasNext()) {
+    		Project p = i.next(); //must be called before iterator removes project, see java api
+    		if (p.getProjectName().equals(theProject)) {
+    			i.remove();
+    		}
+    	}
+    }
+    
+    public void clearCurrentProject() {
+    	myCurrentProject = null;
     }
     
     //returns -1 if project name used previously, make GUI re-prompt for project name if 0 received.

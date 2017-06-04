@@ -24,7 +24,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -37,7 +36,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 public class StartPanel extends JPanel {
@@ -186,6 +184,8 @@ public class StartPanel extends JPanel {
                 System.out.println(myGroup.getCurrentUser());
                 
                 DefaultListModel<String> dlm = new DefaultListModel<String>();
+                System.out.println("#Projects: ");
+                System.out.println(myGroup.getCurrentUser().getProjectNames());
                 for (String s : myGroup.getCurrentUser().getProjectNames()) {
                 	dlm.addElement(s);
                 }
@@ -200,9 +200,31 @@ public class StartPanel extends JPanel {
                 
                 Container c = new Container();
                 c.setLayout(new FlowLayout());
-                c.add(createButton("Open"));
-                c.add(createButton("Delete"));
                 
+                JButton bOpen = createButton("Open");
+                bOpen.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent theEvent) {
+                    	myGroup.getCurrentUser().setCurrentProject(list.getSelectedValue());
+                    	removeAll();
+                    	revalidate();
+                    	repaint();
+                    	addNewProjectComponents();
+                    	
+                    }
+                });
+                
+                JButton bDelete = createButton("Delete");
+                bDelete.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(final ActionEvent theEvent) {
+                    	myGroup.getCurrentUser().deleteProject(list.getSelectedValue());
+                    	dlm.removeElementAt(list.getSelectedIndex());
+                    }
+                });
+                
+                c.add(bOpen);
+                c.add(bDelete);
                 add(c, BorderLayout.SOUTH);
                 
                 
@@ -550,15 +572,25 @@ public class StartPanel extends JPanel {
     	save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	String name = JOptionPane.showInputDialog("Enter project name: ");
-            	//while (myGroup.getCurrentUser().contains(name)) {
-            	//	name = JOptionPane.showInputDialog("Name exists, please choose again: ");
-            	//} //behavior: want saved project to be able to save over loaded w/o rename
-            	while (name.equals("")) {
+            	if (myGroup.getCurrentUser().getProjectName().equals("default")) {
+            		String name = JOptionPane.showInputDialog("Enter project name: ");
+            		//while (myGroup.getCurrentUser().contains(name)) {
+            		//	name = JOptionPane.showInputDialog("Name exists, please choose again: ");
+            		//} //behavior: want saved project to be able to save over loaded w/o rename
+            		while (name.equals("")) {
             		name = JOptionPane.showInputDialog("Enter project name: ");
+            		}
+            		myGroup.getCurrentUser().getProject().setProjectName(name);
+            		restart();
+            		myGroup.getCurrentUser().clearCurrentProject();
+            		System.out.println("projects: ");
+            		System.out.println(myGroup.getCurrentUser().getProjectNames());
+            	} else {
+            		restart();
+            		myGroup.getCurrentUser().clearCurrentProject();
+            		System.out.println("projects: ");
+            		System.out.println(myGroup.getCurrentUser().getProjectNames());
             	}
-            	myGroup.getCurrentUser().getProject().setProjectName(name);
-            	restart();
             }
         });
     	

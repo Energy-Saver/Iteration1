@@ -224,7 +224,9 @@ public class EnergySaverMenuBar extends JMenuBar {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	//myStartPanel.restart();
-            	myGroup.getCurrentUser().deleteProject();
+            	//if (myGroup.getCurrentUser().getFirstName().equals("guest")) {
+            	//	myGroup.getCurrentUser().deleteProject();
+            	//}
             	myGroup.logout();
             	myStartPanel.restart();
             }
