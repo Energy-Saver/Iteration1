@@ -44,6 +44,10 @@ public class User {
     	return myCurrentProject;
     }
     
+    public List<Project> getProjects() {
+    	return myProjects;
+    }
+    
     public int getNumberOfProjects() {
     	return myProjects.size();
     }
@@ -105,6 +109,10 @@ public class User {
     	myCurrentProject = new Project(theProjectName);
     	myProjects.add(myCurrentProject);
     	return 0;
+    }
+    
+    public void addProject(Project theProject) {
+    	myProjects.add(theProject);
     }
     
     //if not found returns -1, returns 0 if success

@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -264,7 +265,14 @@ public class EnergySaverMenuBar extends JMenuBar {
 
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                myGroup.importGroup();
+            	JFileChooser fc = new JFileChooser();
+            	switch (fc.showOpenDialog(myFrame)) {
+            		case JFileChooser.APPROVE_OPTION: //open file
+            			myGroup.importGroup(fc.getSelectedFile());
+            			break;
+            		case JFileChooser.CANCEL_OPTION:
+            			break;
+            	}
             }
         });
         
@@ -272,7 +280,14 @@ public class EnergySaverMenuBar extends JMenuBar {
         exp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-                myGroup.exportGroup();
+            	JFileChooser fc = new JFileChooser();
+            	switch (fc.showSaveDialog(myFrame)) {
+            		case JFileChooser.APPROVE_OPTION: //open file
+            			myGroup.exportGroup(fc.getSelectedFile());
+            			break;
+            		case JFileChooser.CANCEL_OPTION:
+            			break;
+            	}
             }
         });
         
