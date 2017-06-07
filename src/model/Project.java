@@ -43,7 +43,7 @@ public class Project {
 	   myProjectName = theProjectName;
 	   myCurrentBulbType = theCurrentBulbType;
 	   myCurrentBulbWatts = theCurrentBulbWatts;
-	   myReplacementBulbType = BULB_TYPES[2];
+	   myReplacementBulbType = theReplacementBulbType;
 	   myReplacementBulbWatts = theReplacementBulbWatts;
 	   myNumberOfBulbs = theNumberOfBulbs;
 	   myHoursUsedPerDay = theHoursUsedPerDay;

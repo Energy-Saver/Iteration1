@@ -44,6 +44,8 @@ public class StartPanel extends JPanel {
     /** Default size for this JPanel. */
     private static final Dimension DEFAULT_SIZE = new Dimension(600, 400);
     
+    private static final String OPENING_MSG = "Got an account? Then proceed by logging in.";
+    
     private static final int MARGIN = 50;
     private static final int TICK_LENGTH = 5;
     private static final double PERCENT_SPACE_BOTTOM = 0.35;
@@ -81,6 +83,15 @@ public class StartPanel extends JPanel {
     private void addStartComponents() {
     	setLayout(new BorderLayout());
 
+    	Container center = new Container();
+    	//center.setLayout(new GridLayout(0, 1));
+    	JButton bSpace = new JButton();
+    	//bSpace.setVisible(false);
+    	//bSpace.setSize(10, 10);
+    	//JLabel bLabel = new JLabel("\n\nGot an account? Then proceed by logging in.");
+    	//center.add(bSpace);
+    	//center.add(bLabel);
+    	
     	JButton bLogin = createButton("Login");
     	JButton bSignup = createButton("Signup");
     	JButton bContinue = createButton("Continue");
@@ -105,6 +116,7 @@ public class StartPanel extends JPanel {
 
     	addNewProjectListener(bContinue);
     	
+    	//add(center);
     	mySouthPanel.add(bLogin);
     	mySouthPanel.add(bSignup);
     	mySouthPanel.add(bContinue);
@@ -319,6 +331,8 @@ public class StartPanel extends JPanel {
                 e.printStackTrace();
             }
         	g2d.drawImage(myImage, 25, 25, this);
+        	g2d.setColor(Color.BLACK);
+        	g2d.drawString(OPENING_MSG, 50, 225);
         } else if (myPanel.equals("newProject")){
         	File f = new File("icons/blurArrow.png");
             try {
@@ -580,6 +594,7 @@ public class StartPanel extends JPanel {
             		while (name.equals("")) {
             		name = JOptionPane.showInputDialog("Enter project name: ");
             		}
+            		name = name.replaceAll("\\s+", "");
             		myGroup.getCurrentUser().getProject().setProjectName(name);
             		restart();
             		myGroup.getCurrentUser().clearCurrentProject();

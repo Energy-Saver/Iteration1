@@ -126,12 +126,23 @@ public class Group {
 				for (Project p : u.getProjects()) {
 					bw.write(p.getProjectName() + ' ');
 					bw.write(p.getCurrentBulbType() + ' ');
-					bw.write(p.getCurrentBulbWatts() + ' ');
+					
+					Integer cWatts = p.getCurrentBulbWatts();
+					bw.write(cWatts.toString() + ' ');
+					
 					bw.write(p.getReplacementBulbType() + ' ');
-					bw.write(p.getReplacementBulbWatts() + ' ');
-					bw.write(p.getNumberOfBulbs() + ' ');
-					bw.write(p.getHoursUsedPerDay() + ' ');
-					bw.write(p.getNumberDaysPerWeek() + ' ');
+					
+					Integer rWatts = p.getReplacementBulbWatts();
+					bw.write(rWatts.toString() + ' ');
+					
+					Integer nBulbs = p.getNumberOfBulbs();
+					bw.write(nBulbs.toString() + ' ');
+					
+					Integer hrsDay = p.getHoursUsedPerDay();
+					bw.write(hrsDay.toString() + ' ');
+					
+					Integer daysWk = p.getNumberDaysPerWeek();
+					bw.write(daysWk.toString() + ' ');
 					
 					Double rate = p.getElectricRate();
 					bw.write(rate.toString() + ' ');

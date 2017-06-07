@@ -46,6 +46,8 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /** Paint roller icon for JFrame icon and about message dialog. */
     private static final Icon ROLLER = new ImageIcon("icons/estar-large-icon.png");
+    
+    private static final String HOW_TO = "describe how to run this software";
 
     /** Description about the program. */
     private static final String ABOUT_PROGRAM = "TCSS 360\n"
@@ -84,12 +86,6 @@ public class EnergySaverMenuBar extends JMenuBar {
         myFrame = theFrame;
         myStartPanel = theStartPanel;
         myGroup = theGroup;
-        
-        //playing with the panels - needs start 1st
-        //////////myFrame.add(myStartPanel);
-        //myFrame.add(myProjectPanel);
-        //myFrame.remove(myProjectPanel);
-        //myFrame.add(myProjectPanel);
 
         setup(theFrame);
     }
@@ -176,42 +172,6 @@ public class EnergySaverMenuBar extends JMenuBar {
     private JMenu buildFileMenu(final JFrame theFrame) {
         final JMenu fileMenu = new JMenu("Account");
         fileMenu.setMnemonic(KeyEvent.VK_F);
-
-        final JMenuItem signupItem = new JMenuItem("Signup");
-        signupItem.setMnemonic(KeyEvent.VK_S);
-        signupItem.addActionListener(new ActionListener() {
-
-            /**
-             * SignUp menuItem event.
-             *
-             * @param theEvent signUp menuItem event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                showSignup(theFrame);
-            }
-        });
-
-        fileMenu.add(signupItem);
-
-        fileMenu.addSeparator();
-
-        final JMenuItem loginItem = new JMenuItem("Login");
-        loginItem.setMnemonic(KeyEvent.VK_L);
-        loginItem.addActionListener(new ActionListener() {
-
-            /**
-             * Login menuItem event.
-             *
-             * @param theEvent login menuItem event
-             */
-            @Override
-            public void actionPerformed(final ActionEvent theEvent) {
-                showLogin(theFrame);
-            }
-        });
-
-        fileMenu.add(loginItem);
 
         final JMenuItem logoutItem = new JMenuItem("Logout");
         logoutItem.setMnemonic(KeyEvent.VK_O);
@@ -305,6 +265,17 @@ public class EnergySaverMenuBar extends JMenuBar {
     private JMenu buildHelpMenu() {
         final JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
+        
+        //tutorial for how to use this software
+        final JMenuItem howToItem = new JMenuItem("How To");
+        howToItem.setMnemonic(KeyEvent.VK_H);
+        howToItem.addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                JOptionPane.showMessageDialog(null,  HOW_TO, "How To",
+                                              JOptionPane.PLAIN_MESSAGE);
+            }
+        });
 
         final JMenuItem aboutItem = new JMenuItem("About...");
         aboutItem.setMnemonic(KeyEvent.VK_A);
@@ -322,6 +293,7 @@ public class EnergySaverMenuBar extends JMenuBar {
             }
         });
 
+        helpMenu.add(howToItem);
         helpMenu.add(aboutItem);
 
         return helpMenu;
