@@ -9,12 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.io.File;   
-import javax.swing.*;
 
 public class Group {
-	
-	private static final String FILENAME = "exportTest.txt";
-	
 	private User myCurrentUser;
 	private List<User> myUsers;
 	

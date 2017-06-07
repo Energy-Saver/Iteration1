@@ -5,8 +5,6 @@ package view;
 
 import model.*;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,14 +14,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 /**
  * Class PowerPaintMenuBar is a menu bar for program EnergySaver.
@@ -47,7 +41,55 @@ public class EnergySaverMenuBar extends JMenuBar {
     /** Paint roller icon for JFrame icon and about message dialog. */
     private static final Icon ROLLER = new ImageIcon("icons/estar-large-icon.png");
     
-    private static final String HOW_TO = "describe how to run this software";
+    private static final String WELCOME = "We welcome all of the DIYers out there and encourage\n"
+    		                           + "homeowners to help environment while saving money. \n"
+    		                           + "Whether you are interested in insulating your home \n"
+    		                           + "or replacing bulbs to reduce the use of energy, we \n"
+    		                           + "are here to help you make informed decisions. We hope \n"
+    		                           + "that this tool will assist you to successfully assess \n"
+    		                           + "your energy consumption and make changes necessary for \n"
+    		                           + "energy conservation. So go on and give it a try! After \n"
+    		                           + "all there is nothing to loose, it’s a win-win for your \n"
+    		                           + "pocket and the environment.";
+    
+    private static final String HOW_TO = "TUTORIAL\n\n"
+    								   + "Export/Import\n"
+    								   + "Export/Import ability enables you to export/import all "
+    								   + "current group of users as well as their projects.\n\n"
+    								   + "Export\n"
+    								   + "\t1. Click on “Options” at the top of the window\n"
+    								   + "\t2. Click “Export”\n"
+    								   + "\t3. Choose file name and location\n"
+    								   + "\t4. Click “Save”\n\n"
+    								   + "Import\n"
+    								   + "\t1. Click on “Options” at the top of the window\n"
+    								   + "\t2. Click “Export”\n"
+    								   + "\t3. Choose file name and location\n"
+    								   + "\t4. Click “Open”\n\n"
+    								   + "Projects\n"
+    								   + "You can save projects, discard projects as needed, load "
+    								   + "desired project and make necessary changes.\nThis feature "
+    								   + "is only available to members, therefore you have to sign "
+    								   + "up to use it.\n\n"
+    								   + "Save\n" 
+    								   + "If you have account:\n"
+    								   + "\t1. Click “Login”\n"
+    								   + "If you don’t have account:\n"
+    								   + "\t2. Sign Up with your name and email\n"
+    								   + "\t3. Click on “New Project”\n"
+    								   + "\t4. Input the values for calculations\n"
+    								   + "\t5. Press “Calculate” button\n"
+    								   + "\t6. Click “Save Project” or Click “Discard” to remove it\n"
+    								   + "\t7. Enter the name for the Project\n"
+    								   + "\t8. Click “OK”\n\n"
+    								   + "Load\n"
+    								   + "\t1. Click “Login”\n"
+    								   + "\t2. Input your name and email\n"
+    								   + "\t3. Click on “Load Project”\n"
+    								   + "\t4. Click on the desired Project\n"
+    								   + "\t5. Click “Open” or “Delete” to remove it\n"
+    								   + "\t6. Adjust any values if desired\n"
+    								   + "\t7. Click “Calculate”\n";
 
     /** Description about the program. */
     private static final String ABOUT_PROGRAM = "TCSS 360\n"
@@ -59,8 +101,12 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "Nikolai Carlson - developer\n"
                                               + "Keegan J. Kell - developer\n"
                                               + "Lola Howell - UX design / front-end developer\n\n"
-                                              + "GNU Licensed Icon from: \n"
-                                              + "http://icons.iconarchive.com";
+                                              + "GNU licensed icon from: \n"
+                                              + "http://icons.iconarchive.com\n\n"
+                                              + "Creative Commons CC0 licensed arrow image from:\n"
+                                              + "https://pixabay.com\n\n"
+                                              + "GPL licensed header theme image from:\n"
+                                              + "https://wordpress.org";
     
     private final JFrame myFrame;
     //private final StartPanel myStartPanel;
@@ -102,68 +148,6 @@ public class EnergySaverMenuBar extends JMenuBar {
     }
 
     /**
-     * Shows signup dialog box to collect name & email, part of file menu items.
-     *
-     * @param frame the frame (might not be needed)/////////////////////////////////////////
-     */
-    private void showSignup(JFrame frame) {
-        JPanel p = new JPanel(new BorderLayout(5,5));
-
-        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
-        labels.add(new JLabel("First Name:", SwingConstants.RIGHT));
-        labels.add(new JLabel("Email:", SwingConstants.RIGHT));
-        p.add(labels, BorderLayout.WEST);
-
-        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-
-        JTextField userName = new JTextField();
-        JTextField userEmail = new JTextField();
-        controls.add(userName);
-        controls.add(userEmail);
-
-        p.add(controls, BorderLayout.CENTER);
-
-        JOptionPane.showMessageDialog(frame, p, "Signup", JOptionPane.QUESTION_MESSAGE);
-
-        myGroup.signUp(userName.getText(), userEmail.getText());
-    }
-    
-    /**
-     * Shows login dialog box to retrieve name & email, part of file menu items.
-     *
-     * @param frame the frame
-     */
-    private void showLogin(JFrame frame) {
-        JPanel p = new JPanel(new BorderLayout(5,5));
-
-        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
-        labels.add(new JLabel("First Name:", SwingConstants.RIGHT));
-        labels.add(new JLabel("Email:", SwingConstants.RIGHT));
-        p.add(labels, BorderLayout.WEST);
-
-        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
-
-        JTextField userName = new JTextField();
-        JTextField userEmail = new JTextField();
-        controls.add(userName);
-        controls.add(userEmail);
-
-        p.add(controls, BorderLayout.CENTER);
-
-        JOptionPane.showMessageDialog(frame, p, "Login", JOptionPane.QUESTION_MESSAGE);
-
-        myGroup.login(userName.getText(), userEmail.getText());
-        
-        if (myGroup.getUser(userName.getText(), userEmail.getText()) == null) {
-        	System.out.printf("User %s does not exist with email %s.\n", 
-        					  userName.getText(), userEmail.getText());
-        } else {
-        	System.out.printf("User %s logged in succesfully.\n", 
-					  		  userName.getText(), userEmail.getText());
-        }
-    }
-
-    /**
      * Builds/returns file menu.
      *
      * @param theFrame the containing JFrame of this menu bar
@@ -171,10 +155,10 @@ public class EnergySaverMenuBar extends JMenuBar {
      */
     private JMenu buildFileMenu(final JFrame theFrame) {
         final JMenu fileMenu = new JMenu("Account");
-        fileMenu.setMnemonic(KeyEvent.VK_F);
+        fileMenu.setMnemonic(KeyEvent.VK_A);
 
         final JMenuItem logoutItem = new JMenuItem("Logout");
-        logoutItem.setMnemonic(KeyEvent.VK_O);
+        logoutItem.setMnemonic(KeyEvent.VK_L);
         logoutItem.addActionListener(new ActionListener() {
 
             /**
@@ -220,7 +204,8 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenu optionsMenu = new JMenu("Options");
         optionsMenu.setMnemonic(KeyEvent.VK_O);
         
-        final JMenuItem imp = new JMenuItem("Import Group");
+        final JMenuItem imp = new JMenuItem("Import");
+        imp.setMnemonic(KeyEvent.VK_I);
         imp.addActionListener(new ActionListener() {
 
             @Override
@@ -236,7 +221,8 @@ public class EnergySaverMenuBar extends JMenuBar {
             }
         });
         
-        final JMenuItem exp = new JMenuItem("Export Group");
+        final JMenuItem exp = new JMenuItem("Export");
+        exp.setMnemonic(KeyEvent.VK_E);
         exp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
@@ -266,6 +252,17 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
         
+      //welcome message
+        final JMenuItem welcomeItem = new JMenuItem("Welcome");
+        welcomeItem.setMnemonic(KeyEvent.VK_W);
+        welcomeItem.addActionListener(new ActionListener() {
+        	@Override
+            public void actionPerformed(final ActionEvent theEvent) {
+                JOptionPane.showMessageDialog(null,  WELCOME, "Welcome",
+                                              JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        
         //tutorial for how to use this software
         final JMenuItem howToItem = new JMenuItem("How To");
         howToItem.setMnemonic(KeyEvent.VK_H);
@@ -293,6 +290,7 @@ public class EnergySaverMenuBar extends JMenuBar {
             }
         });
 
+        helpMenu.add(welcomeItem);
         helpMenu.add(howToItem);
         helpMenu.add(aboutItem);
 

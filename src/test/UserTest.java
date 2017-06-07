@@ -2,11 +2,12 @@
  * TCSS 360 - Iteration 1: Product v0.1
  */
 
-package model;
+package test;
 
 //import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 

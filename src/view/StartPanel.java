@@ -39,12 +39,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class StartPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5938682207504409404L;
+
 	private static final Color ES_BLUE = new Color(86, 132, 197); //blue: #5684c5
 	
     /** Default size for this JPanel. */
     private static final Dimension DEFAULT_SIZE = new Dimension(600, 400);
-    
-    private static final String OPENING_MSG = "Got an account? Then proceed by logging in.";
     
     private static final int MARGIN = 50;
     private static final int TICK_LENGTH = 5;
@@ -71,7 +74,15 @@ public class StartPanel extends JPanel {
         setPreferredSize(DEFAULT_SIZE);
         setBackground(Color.WHITE);
         addStartComponents();
-        
+
+//        URL url = EnergySaverMain.class.getResource("/icons/title.png");
+//        try {
+//			myImage = ImageIO.read(url);
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//        
         File f = new File("icons/title.png");
         try {
             myImage = ImageIO.read(f);
@@ -82,15 +93,6 @@ public class StartPanel extends JPanel {
 
     private void addStartComponents() {
     	setLayout(new BorderLayout());
-
-    	Container center = new Container();
-    	//center.setLayout(new GridLayout(0, 1));
-    	JButton bSpace = new JButton();
-    	//bSpace.setVisible(false);
-    	//bSpace.setSize(10, 10);
-    	//JLabel bLabel = new JLabel("\n\nGot an account? Then proceed by logging in.");
-    	//center.add(bSpace);
-    	//center.add(bLabel);
     	
     	JButton bLogin = createButton("Login");
     	JButton bSignup = createButton("Signup");
@@ -116,7 +118,6 @@ public class StartPanel extends JPanel {
 
     	addNewProjectListener(bContinue);
     	
-    	//add(center);
     	mySouthPanel.add(bLogin);
     	mySouthPanel.add(bSignup);
     	mySouthPanel.add(bContinue);
@@ -205,7 +206,6 @@ public class StartPanel extends JPanel {
                 
                 
                 myPanel = "loadSelect";
-                JPanel p = new JPanel();
                 
                 setLayout(new BorderLayout());
                 add(new JScrollPane(list));
@@ -238,15 +238,6 @@ public class StartPanel extends JPanel {
                 c.add(bOpen);
                 c.add(bDelete);
                 add(c, BorderLayout.SOUTH);
-                
-                
-                //for (Project p : myGroup.getCurrentUser().getProjects()) {
-                //	System.out.println(p);
-                //}
-                
-                
-                //this should happen after user selects project name
-                //addNewProjectComponents();
             }
         });
     }
@@ -323,16 +314,14 @@ public class StartPanel extends JPanel {
         int panelW = (int) (myFrame.getWidth() / 2.0);
         int panelH = (int) (myFrame.getHeight() / 2.0);
         
-        if (myPanel.equals("start")) {
-        	File f = new File("icons/title.png");
+        if (myPanel.equals("start")) {    	
+        	File f = new File("icons/titleIntro.png");
             try {
                 myImage = ImageIO.read(f);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         	g2d.drawImage(myImage, 25, 25, this);
-        	g2d.setColor(Color.BLACK);
-        	g2d.drawString(OPENING_MSG, 50, 225);
         } else if (myPanel.equals("newProject")){
         	File f = new File("icons/blurArrow.png");
             try {
