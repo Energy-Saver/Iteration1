@@ -98,27 +98,36 @@ public class Project {
 	   myProjectName = thisProjectName;
    }
    
-   public void setCurrentBulbType(String theCurrentBulbType) {
-	   //if is legal bulb type
+   public boolean setCurrentBulbType(String theCurrentBulbType) {
+	   if (!checkBulb(theCurrentBulbType)) {
+		   return false;
+	   }
 	   myCurrentBulbType = theCurrentBulbType;
+	   return true;
    }
    
    public void setCurrentBulbWatts(int theCurrentBulbWatts) {
 	   myCurrentBulbWatts = theCurrentBulbWatts;
    }
    
-   public void setReplacementBulbType(String theReplacementBulbType) {
-	   //same
+   public boolean setReplacementBulbType(String theReplacementBulbType) {
+	   if (!checkBulb(theReplacementBulbType)) {
+		   return false;
+	   }
 	   myReplacementBulbType = theReplacementBulbType;
+	   return true;
    }
    
    public void setReplacementBulbWatts(int theReplacementBulbWatts) {
 	   myReplacementBulbWatts = theReplacementBulbWatts;
    }
    
-   public void setNumberOfBulbs(int theNumberOfBulbs) {
-	   //check if positive
+   public boolean setNumberOfBulbs(int theNumberOfBulbs) {
+	   if (theNumberOfBulbs <= 0) {
+		   return false;
+	   }
 	   myNumberOfBulbs = theNumberOfBulbs;
+	   return true;
    }
    
    public void setHoursUsedPerDay(int theHoursUsedPerDay) {
@@ -129,9 +138,12 @@ public class Project {
 	   myNumberDaysPerWeek = theNumberDaysPerWeek;
    }
    
-   public void setElectricRate(double theElectricRate) {
-	   //check something
+   public boolean setElectricRate(double theElectricRate) {
+	   if (theElectricRate <= .05 || theElectricRate >= .4) {
+		   return false; //Hawaii has highest rate @ ~.35, WA lowest ~.07
+	   }
 	   myElectricRate = theElectricRate;
+	   return true;
    }
    
    public void setReplacementBulbCost(double theReplacementBulbCost) {
@@ -171,6 +183,15 @@ public class Project {
 	   double costPerHour = myBulbs.get(theBulbType) / 1000.0 * myElectricRate;
 	   return hoursPerYear * costPerHour * myNumberOfBulbs;
    }
+   
+private boolean checkBulb(String theBulbType) {
+	for (String b : BULB_TYPES) {
+		if (b.equals(theBulbType)) {
+			return true;
+		}
+	}
+	return false;
+}
 
    public String toString() {
       StringBuilder sb = new StringBuilder(80);

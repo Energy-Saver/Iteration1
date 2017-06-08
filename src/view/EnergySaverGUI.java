@@ -27,7 +27,7 @@ import javax.swing.JFrame;
  */
 public class EnergySaverGUI {
     /** Title for the JFrame. */
-    private static final String TITLE = "TCSS 360 - Iteration 1";
+    private static final String TITLE = "TCSS 360";
 
     /** The window for this GUI. */
     private final JFrame myFrame;
