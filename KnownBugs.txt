@@ -1,0 +1,18 @@
+user could save project name as "default" causing buggy behaviour
+
+gui should restrict certain values (negatives, 0) etc. and re-prompt
+
+behavior when certain windows are closed without input is not well defined
+
+null pointer exception after (unsure of exact events) exporting and clicking continue... not repeatable
+possible solution would be to place multiple variations of JUnit tests similar to suspected events and repeatedly running tests
+
+testing (include screenshot):
+running the program on a linux machine causes issues with spacing or font sizes
+possible solution would be to explicitly set font size or un-lock window size and pack the frame to fit
+
+in 'continue' mode (guest user), 'save project' should not be offered or it should migrate data to a user if they later signup
+
+graph labels may become too long for the space available if user has many lights
+
+mouse active components should be set once a panel is drawn
