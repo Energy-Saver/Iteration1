@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration 1: Product v0.1
+ * TCSS 360 - Deliverable 3
  */
 
 package model;
@@ -9,14 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * The user.
+ * Class user defines a single user with associated login information and projects.
  *
  * @author Alex Smith
- * @author Darren Carpenter
- * @author Nikolai Carlson
- * @author Keegan Kell
- * @author Lola Howell
- * @version 16 April 2016 - Iteration 1
+ * @version 8 June 2017
  */
 public class User {
     /** User's first name. */
@@ -40,18 +36,35 @@ public class User {
         myProjects = new ArrayList<Project>();
     }
     
+    /**
+     * Returns current project.
+     * @return current project
+     */
     public Project getProject() {
     	return myCurrentProject;
     }
     
+    /**
+     * Returns collection of this user's projects.
+     * @return collection of this user's projects
+     */
     public List<Project> getProjects() {
     	return myProjects;
     }
     
+    /**
+     * Returns number of projects for this user.
+     * @return number of projects for this user
+     */
     public int getNumberOfProjects() {
     	return myProjects.size();
     }
     
+    /**
+     * Returns true if user has a project with theName.
+     * @param theName name of the project to verify
+     * @return true if user has a project with theName
+     */
     public boolean contains(String theName) {
     	for (Project p : myProjects) {
     		if (p.getProjectName().equals(theName)) {
@@ -61,7 +74,10 @@ public class User {
     	return false;
     }
     
-    //new, return copy?
+    /**
+     * Returns collection of user's project names.
+     * @return collection of user's project names
+     */
     public List<String> getProjectNames() {
     	List<String> list = new ArrayList<String>();
     	for (Project p : myProjects) {
@@ -70,6 +86,10 @@ public class User {
     	return list;
     }
     
+    /**
+     * Sets current project to theProjectName, or to null if not found.
+     * @param theProjectName name of project to set current to
+     */
     public void setCurrentProject(String theProjectName) {
     	for (Project p : myProjects) {
     		if (p.getProjectName().equals(theProjectName)) {
@@ -80,12 +100,18 @@ public class User {
     	myCurrentProject = null; //if not found, verify clear field
     }
     
+    /**
+     * Deletes the currently loaded project.
+     */
     public void deleteProject() {
     	myProjects.remove(myCurrentProject);
     	myCurrentProject = null;
-    	System.out.println(myProjects.size());
     }
     
+    /**
+     * Deletes theProject from this user.
+     * @param theProject project to delete
+     */
     public void deleteProject(String theProject) {
     	Iterator<Project> i = myProjects.iterator();
     	while (i.hasNext()) {
@@ -100,8 +126,12 @@ public class User {
     	myCurrentProject = null;
     }
     
-    //returns -1 if project name used previously, make GUI re-prompt for project name if 0 received.
-    //loads newly created project as well
+    /**
+     * Creates new project with theProjectName, returning success of 0.  If there is an existing
+     * project with that name, returns -1 indicating failure.
+     * @param theProjectName name of new project
+     * @return 0 if successfully created project, else -1
+     */
     public int createNewProject(String theProjectName) {
     	if (myProjects.contains(theProjectName)) {
     		return -1;
@@ -116,6 +146,11 @@ public class User {
     }
     
     //if not found returns -1, returns 0 if success
+    /**
+     * Loads theProject returning success of 0, if theProject does not exist, returns -1.
+     * @param theProject project to load
+     * @return 0 if successfully loaded, else -1
+     */
     public int loadProject(String theProject) {
     	if (myProjects.indexOf(theProject) == -1) {
     		return -1;
@@ -126,7 +161,6 @@ public class User {
 
     /**
      * Returns first name of user.
-     *
      * @return first name of user
      */
     public String getFirstName() {
@@ -135,7 +169,6 @@ public class User {
 
     /**
      * Returns email of user.
-     *
      * @return email of user
      */
     public String getEmail() {
@@ -148,7 +181,6 @@ public class User {
 
     /**
      * Returns string representation of the user.
-     *
      * @return string representation of the user
      */
     @Override

@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration 1: Product v0.1
+ * TCSS 360 - Deliverable 3
  */
 package view;
 
@@ -18,12 +18,9 @@ import javax.swing.JFrame;
  * GNU Licensed icon from:
  * http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo/App-energy-star-icon.html
  *
- * @author Alex Smith
- * @author Darren Carpenter
- * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration 1
+ * @version 8 June 2017
  */
 public class EnergySaverGUI {
     /** Title for the JFrame. */
@@ -32,6 +29,7 @@ public class EnergySaverGUI {
     /** The window for this GUI. */
     private final JFrame myFrame;
     
+    /** The group of users. */
     private Group myGroup;
 
     /**
@@ -47,11 +45,7 @@ public class EnergySaverGUI {
      * Sets up the GUI.
      */
     private void setup() {
-    	//myGroup.signUp("Keegan", "lumen@ous.com");
-        //myGroup.getCurrentUser().createNewProject("first project");
-        
-        //final ProjectPanel pp = new ProjectPanel(myFrame, myGroup);
-        final StartPanel sp = new StartPanel(myFrame, myGroup/*, pp*/);
+        final StartPanel sp = new StartPanel(myFrame, myGroup);
         final EnergySaverMenuBar menuBar = new EnergySaverMenuBar(myFrame, myGroup, sp);
         
         myFrame.add(sp);

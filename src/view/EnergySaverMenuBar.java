@@ -1,5 +1,5 @@
 /**
- * TCSS 360 - Iteration 1: Product v0.1
+ * TCSS 360 - Deliverable 3
  */
 package view;
 
@@ -20,17 +20,16 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
- * Class PowerPaintMenuBar is a menu bar for program EnergySaver.
+ * Class EnergySaverMenuBar is a menu bar for program EnergySaver.
  *
  * GNU Licensed icon from:
  * http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo/App-energy-star-icon.html
  *
- * @author Alex Smith
- * @author Darren Carpenter
- * @author Nikolai Carlson
  * @author Keegan Kell
  * @author Lola Howell
- * @version 16 April 2016 - Iteration 1
+ * @author Darren Carpenter
+ * @author Alex Smith
+ * @version 8 June 2017
  */
 public class EnergySaverMenuBar extends JMenuBar {
     /**
@@ -38,9 +37,10 @@ public class EnergySaverMenuBar extends JMenuBar {
      */
     private static final long serialVersionUID = -1717799894208755241L;
 
-    /** Paint roller icon for JFrame icon and about message dialog. */
+    /** Icon for use in about screen. */
     private static final Icon ROLLER = new ImageIcon("icons/estar-large-icon.png");
     
+    /** Welcome message found in help menu. */
     private static final String WELCOME = "We welcome all of the DIYers out there and encourage\n"
     		                           + "homeowners to help environment while saving money. \n"
     		                           + "Whether you are interested in insulating your home \n"
@@ -52,6 +52,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     		                           + "all there is nothing to loose, it’s a win-win for your \n"
     		                           + "pocket and the environment.";
     
+    /** How to tutorial found in help menu. */
     private static final String HOW_TO = "TUTORIAL\n\n"
     								   + "Export/Import\n"
     								   + "Export/Import ability enables you to export/import all "
@@ -91,7 +92,7 @@ public class EnergySaverMenuBar extends JMenuBar {
     								   + "\t6. Adjust any values if desired\n"
     								   + "\t7. Click “Calculate”\n";
 
-    /** Description about the program. */
+    /** Description about the program found in help menu. */
     private static final String ABOUT_PROGRAM = "TCSS 360\n"
                                               + "Software Development & Quality Assurance Techniques\n"
                                               + "SPRING 2017\n\n"
@@ -108,22 +109,18 @@ public class EnergySaverMenuBar extends JMenuBar {
                                               + "GPL licensed header theme image from:\n"
                                               + "https://wordpress.org";
     
+    /** The frame. */
     private final JFrame myFrame;
     //private final StartPanel myStartPanel;
 
-    /** Panel reference (used to pass menuBar values to the panel).
-     *  Needed for passing myGroup to panel? */
+    /** Panel reference used to restart program. */
     private StartPanel myStartPanel;
     
-    /** Similar to creating the board in Tetris.*/
+    /** Group of users.*/
     private Group myGroup;
-
-    /** Tools menu on the menu bar, contains the various tools. */
-    //private final JMenu myToolsMenu;
 
     /**
      * Constructs the menu bar.
-     *
      * @param theFrame b
      * @param thePanel b
      */
@@ -138,7 +135,6 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /**
      * Helps build the menu bar for this GUI.
-     *
      * @param theFrame the containing JFrame of this menu bar
      */
     private void setup(final JFrame theFrame) {
@@ -149,8 +145,7 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /**
      * Builds/returns file menu.
-     *
-     * @param theFrame the containing JFrame of this menu bar
+     * @param theFrame containing the JFrame of this menu bar
      * @return a "file" menu with some menu items
      */
     private JMenu buildFileMenu(final JFrame theFrame) {
@@ -160,18 +155,12 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem logoutItem = new JMenuItem("Logout");
         logoutItem.setMnemonic(KeyEvent.VK_L);
         logoutItem.addActionListener(new ActionListener() {
-
             /**
              * Logout menuItem event.
-             *
              * @param theEvent logout menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	//myStartPanel.restart();
-            	//if (myGroup.getCurrentUser().getFirstName().equals("guest")) {
-            	//	myGroup.getCurrentUser().deleteProject();
-            	//}
             	myGroup.logout();
             	myStartPanel.restart();
             }
@@ -184,10 +173,8 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem exitItem = new JMenuItem("Quit");
         exitItem.setMnemonic(KeyEvent.VK_Q);
         exitItem.addActionListener(new ActionListener() {
-
             /**
              * Closes window upon quit menuItem event.
-             *
              * @param theEvent quit menuItem event
              */
             @Override
@@ -207,7 +194,10 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem imp = new JMenuItem("Import");
         imp.setMnemonic(KeyEvent.VK_I);
         imp.addActionListener(new ActionListener() {
-
+        	/**
+             * Prompts for file filename upon menuItem event.
+             * @param theEvent import menuItem event
+             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	JFileChooser fc = new JFileChooser();
@@ -224,6 +214,10 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem exp = new JMenuItem("Export");
         exp.setMnemonic(KeyEvent.VK_E);
         exp.addActionListener(new ActionListener() {
+        	/**
+             * Prompts for file filename upon menuItem event.
+             * @param theEvent export menuItem event
+             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	JFileChooser fc = new JFileChooser();
@@ -245,17 +239,19 @@ public class EnergySaverMenuBar extends JMenuBar {
 
     /**
      * Returns/builds help menu.
-     *
-     * @return a "help" menu with an "About..." menu item
+     * @return built help menu
      */
     private JMenu buildHelpMenu() {
         final JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
         
-      //welcome message
         final JMenuItem welcomeItem = new JMenuItem("Welcome");
         welcomeItem.setMnemonic(KeyEvent.VK_W);
         welcomeItem.addActionListener(new ActionListener() {
+        	/**
+             * Shows welcome message upon menuItem event.
+             * @param theEvent welcome menuItem event
+             */
         	@Override
             public void actionPerformed(final ActionEvent theEvent) {
                 JOptionPane.showMessageDialog(null,  WELCOME, "Welcome",
@@ -263,10 +259,13 @@ public class EnergySaverMenuBar extends JMenuBar {
             }
         });
         
-        //tutorial for how to use this software
         final JMenuItem howToItem = new JMenuItem("How To");
         howToItem.setMnemonic(KeyEvent.VK_H);
         howToItem.addActionListener(new ActionListener() {
+        	/**
+             * Shows how to upon menuItem event.
+             * @param theEvent how to menuItem event
+             */
         	@Override
             public void actionPerformed(final ActionEvent theEvent) {
                 JOptionPane.showMessageDialog(null,  HOW_TO, "How To",
@@ -277,11 +276,9 @@ public class EnergySaverMenuBar extends JMenuBar {
         final JMenuItem aboutItem = new JMenuItem("About...");
         aboutItem.setMnemonic(KeyEvent.VK_A);
         aboutItem.addActionListener(new ActionListener() {
-
-            /**
-             * Shows a dialog screen describing program upon menu selection.
-             *
-             * @param theEvent menu selection of About...
+        	/**
+             * Shows about dialog upon menuItem event.
+             * @param theEvent about menuItem event
              */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
