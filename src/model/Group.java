@@ -53,10 +53,10 @@ public class Group {
 	 */
 	public void guestUser() {
 		if (myUsers.isEmpty() || !myUsers.contains(getUser("guest", "null@void.com"))) {
-			System.out.println("guest user created");
+			//System.out.println("guest user created");
 			myCurrentUser = new User("guest", "null@void.com");
 		} else {
-			System.out.println("logged in guest");
+			//System.out.println("logged in guest");
 			login("guest", "null@void.com");
 		}
 	}

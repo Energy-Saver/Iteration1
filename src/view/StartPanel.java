@@ -1,9 +1,7 @@
 /**
- * TCSS 360 - Iteration1: PowerPaint
+ * TCSS 360 - Deliverable 3
  */
 package view;
-
-//https://pixabay.com/en/arrow-dashed-pattern-colorful-2207745/
 
 import model.*;
 
@@ -38,27 +36,61 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * Class StartPanel is the main panel used in the frame.
+ * It is updated and redrawn at various points.
+ *
+ * Creative Commons CC0 licensed arrow image from:
+ * http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo/App-energy-star-icon.html
+ * 
+ * GPL licensed header theme image from:
+ * https://wordpress.org
+ *
+ * @author Keegan Kell
+ * @author Lola Howell
+ * @version 8 June 2017
+ */
 public class StartPanel extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5938682207504409404L;
 
-	private static final Color ES_BLUE = new Color(86, 132, 197); //blue: #5684c5
+	/** RGB Energy Saver Blue #5684c5 */
+	private static final Color ES_BLUE = new Color(86, 132, 197);
 	
     /** Default size for this JPanel. */
     private static final Dimension DEFAULT_SIZE = new Dimension(600, 400);
     
+    /** Margin for chart. */
     private static final int MARGIN = 50;
+    
+    /** Tick Length for chart. */
     private static final int TICK_LENGTH = 5;
+    
+    /** Percent space below the bottom of the chart. */
     private static final double PERCENT_SPACE_BOTTOM = 0.35;
-   
+    
+    /** The frame. */
     private JFrame myFrame;
+    
+    /** The group. */
     private Group myGroup;
+    
+    /** The image used in the frame. */
     private BufferedImage myImage;
+    
+    /** Represents what state the panel should display. */
     public String myPanel;
+    
+    /** South panel used for buttons. */
     private JPanel mySouthPanel;
 
+    /**
+     * Constructs the panel with theFrame and theGroup.
+     * @param theFrame frame used to display panel
+     * @param theGroup group of users for the program
+     */
     public StartPanel(JFrame theFrame, Group theGroup) {
         super();
 
@@ -70,11 +102,14 @@ public class StartPanel extends JPanel {
         setup();
     }
     
+    /**
+     * Sets up the panel.
+     */
     private void setup() {
         setPreferredSize(DEFAULT_SIZE);
         setBackground(Color.WHITE);
         addStartComponents();
-
+//attempting jar fix
 //        URL url = EnergySaverMain.class.getResource("/icons/title.png");
 //        try {
 //			myImage = ImageIO.read(url);
@@ -91,6 +126,9 @@ public class StartPanel extends JPanel {
         }
     }
 
+    /**
+     * Adds components to the program's starting panel state.
+     */
     private void addStartComponents() {
     	setLayout(new BorderLayout());
     	
@@ -126,21 +164,26 @@ public class StartPanel extends JPanel {
         this.add(mySouthPanel, BorderLayout.SOUTH);
     }
     
+    /**
+     * Adds project listener for theButton with new project action behavior.
+     * @param theButton button to add listener to
+     */
     private void addNewProjectListener(JButton theButton) {
     	if (theButton.getText().equals("Continue")) {
     		myGroup.guestUser();
-    		System.out.println("contineued, guestUser created");
     	}
     	
     	theButton.addActionListener(new ActionListener() {
+    		/**
+        	 * Opens a new project while using a 'guest' user.
+        	 * @param theEvent continue button event
+        	 */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
                 removeAll();
                 revalidate();
                 myPanel = "newProject";
                 repaint();
-                System.out.println(myGroup.getCurrentUser());
-                System.out.println("group size: " + myGroup.groupSize());
                 myGroup.getCurrentUser().createNewProject("default"); //change after save
                 
                 addNewProjectComponents();
@@ -148,6 +191,9 @@ public class StartPanel extends JPanel {
         });
     }
     
+    /**
+     * Enables the load project button and sets state of panel once user is signed in.
+     */
     private void enableHistory() {
     	if (myGroup.getCurrentUser() != null && !myGroup.getCurrentUser().getFirstName().equals("guest")) {
     		JButton bLoad = createButton("Load Project");
@@ -165,6 +211,11 @@ public class StartPanel extends JPanel {
     	}
     }
     
+    /**
+     * Creates and returns a blue button with white font and given theLabel.
+     * @param theLabel
+     * @return
+     */
     private JButton createButton(String theLabel) {
     	JButton b = new JButton(theLabel);
     	b.setBackground(ES_BLUE);
@@ -172,6 +223,9 @@ public class StartPanel extends JPanel {
         return b;
     }
     
+    /**
+     * Restarts the panel to starting state.
+     */
     protected void restart() {
     	myPanel = "start";
     	removeAll();
@@ -186,6 +240,10 @@ public class StartPanel extends JPanel {
     	repaint();
     }
     
+    /**
+     * Adds project listener for theButton with load project action behavior.
+     * @param theButton button to add listener to
+     */
     private void addLoadProjectListener(JButton theButton) {
     	theButton.addActionListener(new ActionListener() {
             @Override
@@ -194,11 +252,13 @@ public class StartPanel extends JPanel {
                 revalidate();
                 myPanel = "newProject";
                 repaint();
-                System.out.println(myGroup.getCurrentUser());
                 
                 DefaultListModel<String> dlm = new DefaultListModel<String>();
-                System.out.println("#Projects: ");
-                System.out.println(myGroup.getCurrentUser().getProjectNames());
+                
+                //for debugging:
+                //System.out.println("User's Projects: ");
+                //System.out.println(myGroup.getCurrentUser().getProjectNames());
+                
                 for (String s : myGroup.getCurrentUser().getProjectNames()) {
                 	dlm.addElement(s);
                 }
@@ -215,6 +275,10 @@ public class StartPanel extends JPanel {
                 
                 JButton bOpen = createButton("Open");
                 bOpen.addActionListener(new ActionListener() {
+                	/**
+                	 * Opens currently selected project.
+                	 * @param theEvent open button event
+                	 */
                     @Override
                     public void actionPerformed(final ActionEvent theEvent) {
                     	myGroup.getCurrentUser().setCurrentProject(list.getSelectedValue());
@@ -228,6 +292,10 @@ public class StartPanel extends JPanel {
                 
                 JButton bDelete = createButton("Delete");
                 bDelete.addActionListener(new ActionListener() {
+                	/**
+                	 * Deletes currently selected project.
+                	 * @param theEvent delete button event
+                	 */
                     @Override
                     public void actionPerformed(final ActionEvent theEvent) {
                     	myGroup.getCurrentUser().deleteProject(list.getSelectedValue());
@@ -243,7 +311,7 @@ public class StartPanel extends JPanel {
     }
     
     /**
-     * Shows login dialog box to retrieve name & email, part of file menu items.
+     * Shows login dialog box to parse name & email.
      */
     private boolean showLogin() {
         JPanel p = new JPanel(new BorderLayout(5,5));
@@ -278,7 +346,7 @@ public class StartPanel extends JPanel {
     }
     
     /**
-     * Shows signup dialog box to collect name & email, part of file menu items.
+     * Shows signup dialog box to parse name & email.
      */
     private boolean showSignup() {
         JPanel p = new JPanel(new BorderLayout(5,5));
@@ -304,6 +372,10 @@ public class StartPanel extends JPanel {
         return true;
     }
     
+    /**
+     * Draws images, graphs, text, etc. when appropriate.
+     * @param theGraphics the pen
+     */
     @Override
     public void paintComponent(final Graphics theGraphics) {
     	super.paintComponent(theGraphics);
@@ -331,8 +403,6 @@ public class StartPanel extends JPanel {
             }
         	g2d.drawImage(myImage, panelW + 25, 0, this);
         } else if (myPanel.equals("showResult")){
-        	//add(new DrawChart(g2d, myFrame, myGroup));
-            
             int graphW = panelW - 2 * MARGIN;
             int graphH = (int) (panelH - MARGIN - PERCENT_SPACE_BOTTOM * panelH);
             int offsW = (int) (myFrame.getWidth() / 2.0);
@@ -411,6 +481,9 @@ public class StartPanel extends JPanel {
         }
     }
     
+    /**
+     * Adds data from the current project to the panel.
+     */
     private void addNewProjectComponents() {
     	setLayout(new GridLayout(0, 2));
     	Container left = new Container();
@@ -470,6 +543,7 @@ public class StartPanel extends JPanel {
     	JLabel lblReplBulbCost = new JLabel("Replacement Bulb Cost");
     	JTextField fieldReplBulbCost = new JTextField(Double.toString(p.getReplacementBulbCost()));
     	
+    	//blank space, invisible items
     	String[] b = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"};
     	JLabel[] labels = new JLabel[b.length];
     	for (int i = 0; i < b.length; i++) {
@@ -519,6 +593,10 @@ public class StartPanel extends JPanel {
     	
     	JButton bCalculate = createButton("Calculate");
     	bCalculate.addActionListener(new ActionListener() {
+    		/**
+        	 * Calculates the data of the current project.
+        	 * @param theEvent calculate button event
+        	 */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	String currentType = (String) bulbTypes.getSelectedItem();
@@ -546,40 +624,42 @@ public class StartPanel extends JPanel {
             	
             	myPanel = "showResult";
             	modifyResultUI(left, bCalculate);
-            	System.out.println(myGroup.getCurrentUser().getProject());
             }
     	});
     	left.add(bCalculate);
     	
     	add(left);
-    	
-    	//if (myPanel.equals("loadProject")) {
-    	//	bCalculate.doClick();
-    	//} // see: line 178, was "loadProject" but caused left panel to not work
     }
     
+    /**
+     * Modifies the user interface to show discard and save buttons in the south panel.
+     * @param theContainer container for to remove the passed button from
+     * @param theFirstButton the button to remove
+     */
     private void modifyResultUI(Container theContainer, JButton theFirstButton) {
     	theContainer.remove(theFirstButton);
     	JButton discard = createButton("Discard");
     	discard.addActionListener(new ActionListener() {
+    		/**
+        	 * Discards the current project.
+        	 * @param theEvent discard button event
+        	 */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	myGroup.getCurrentUser().deleteProject();
             	restart();
-            	System.out.println("group size: " + myGroup.groupSize());
-            	System.out.println("current user: " + myGroup.getCurrentUser());
-            	System.out.println("current user's # projects: " + myGroup.getCurrentUser().getNumberOfProjects());
             }
         });
     	JButton save = createButton("Save Project");
     	save.addActionListener(new ActionListener() {
+    		/**
+        	 * Saves the current project, prompts for name.
+        	 * @param theEvent save project button event
+        	 */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
             	if (myGroup.getCurrentUser().getProjectName().equals("default")) {
             		String name = JOptionPane.showInputDialog("Enter project name: ");
-            		//while (myGroup.getCurrentUser().contains(name)) {
-            		//	name = JOptionPane.showInputDialog("Name exists, please choose again: ");
-            		//} //behavior: want saved project to be able to save over loaded w/o rename
             		while (name.equals("")) {
             		name = JOptionPane.showInputDialog("Enter project name: ");
             		}
@@ -587,18 +667,19 @@ public class StartPanel extends JPanel {
             		myGroup.getCurrentUser().getProject().setProjectName(name);
             		restart();
             		myGroup.getCurrentUser().clearCurrentProject();
-            		System.out.println("projects: ");
-            		System.out.println(myGroup.getCurrentUser().getProjectNames());
+            		//for debugging:
+            		//System.out.println("projects: ");
+            		//System.out.println(myGroup.getCurrentUser().getProjectNames());
             	} else {
             		restart();
             		myGroup.getCurrentUser().clearCurrentProject();
-            		System.out.println("projects: ");
-            		System.out.println(myGroup.getCurrentUser().getProjectNames());
+            		//for debugging:
+            		//System.out.println("projects: ");
+            		//System.out.println(myGroup.getCurrentUser().getProjectNames());
             	}
             }
         });
-    	
-    	//Container c = new Container();
+
     	mySouthPanel = new JPanel();
     	revalidate();
     	repaint();
@@ -609,32 +690,28 @@ public class StartPanel extends JPanel {
     	add(mySouthPanel, BorderLayout.SOUTH);
     }
     
+    /**
+     * Adds action listener to bulbs' theComboBox (for future behavior).
+     * @param theComboBox combo box to add the listener to
+     */
     private void addBulbsActionListener(JComboBox<String> theComboBox) {
     	theComboBox.addActionListener(new ActionListener() {
-
-            /**
-             * Action listener for color chooser, updates draw color based on user selection.
-             *
-             * @param theEvent draw color chooser event
-             */
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	//@SuppressWarnings("unchecked")
-				//JComboBox<String> cb = (JComboBox<String>)theEvent.getSource();
-                //String type = (String)cb.getSelectedItem();
+            	//define later
             }
         });
     }
     
+    /**
+     * Adds action listener to wattages' theComboBox (for future behavior).
+     * @param theComboBox combo box to add the listener to
+     */
     private void addWattagesActionListener(JComboBox<Integer> theComboBox) {
     	theComboBox.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(final ActionEvent theEvent) {
-            	//@SuppressWarnings("unchecked")
-				//JComboBox<Integer> cb = (JComboBox<Integer>)theEvent.getSource();
-                //int wattage = (int) cb.getSelectedItem();
-                //System.out.println(wattage);
+            	//define later
             }
         });
     }
