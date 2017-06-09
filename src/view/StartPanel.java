@@ -46,8 +46,9 @@ import javax.swing.SwingConstants;
  * GPL licensed header theme image from:
  * https://wordpress.org
  *
- * @author Keegan Kell
- * @author Lola Howell
+ * @author Keegan Kell - coding/editing
+ * @author Lola Howell - coding/editing
+ * @author Darren Carpenter - editing
  * @version 8 June 2017
  */
 public class StartPanel extends JPanel {

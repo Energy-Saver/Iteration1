@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Class Project contains information surrounding an energy comparison.
  * 
- * @author Darren Carpenter
+ * @author Darren Carpenter - coding/editing
  * @version 8 June 2017
  */
 public class Project {

@@ -15,7 +15,7 @@ import model.Project;
 /**
  * Tests of the Project class.
  *
- * @author Nikolai Carlson
+ * @author Nikolai Carlson - editing
  * @version 8 June 2017
  */
 public class ProjectTest {

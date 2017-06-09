@@ -18,7 +18,7 @@ import java.io.File;
  * Class group contains a list of users and a current user along with associated
  * group functionality.
  * 
- * @author Nikolai Carlson
+ * @author Nikolai Carlson - coding/editing
  * @version 8 June 2017
  */
 public class Group {

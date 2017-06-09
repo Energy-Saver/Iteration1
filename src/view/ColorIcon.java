@@ -12,7 +12,8 @@ import javax.swing.Icon;
  * Class ColorIcon defines a simple colored square icon that may be set to any color.
  * It's height and width is not changeable and set to 15x15.
  *
- * @author Alex Smith
+ * @author Alex Smith - coding
+ * @author Lola Howell - editing
  * @version 8 June 2017
  */
 public class ColorIcon implements Icon {

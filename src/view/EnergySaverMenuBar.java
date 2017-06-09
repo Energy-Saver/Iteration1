@@ -25,8 +25,8 @@ import javax.swing.JOptionPane;
  * GNU Licensed icon from:
  * http://www.iconarchive.com/show/crystal-clear-icons-by-everaldo/App-energy-star-icon.html
  *
- * @author Keegan Kell
- * @author Lola Howell
+ * @author Keegan Kell - coding/editing
+ * @author Lola Howell - coding/editing
  * @version 8 June 2017
  */
 public class EnergySaverMenuBar extends JMenuBar {

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Class user defines a single user with associated login information and projects.
  *
- * @author Alex Smith
+ * @author Alex Smith - coding/editing
  * @version 8 June 2017
  */
 public class User {
