@@ -13,7 +13,7 @@ import org.junit.Test;
 /**
  * Tests of the User class.
  *
- * @author Nikolai Carlson
+ * @author Darren Carpenter
  * @version 8 June 2017
  */
 public class UserTest {

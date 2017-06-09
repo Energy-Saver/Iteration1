@@ -17,7 +17,6 @@ import org.junit.Test;
  * Tests of the Group class.
  * 
  * @author Nikolai Carlson
- * @author Keegan Kell
  * @version 8 June 2017
  */
 public class GroupTest {

@@ -11,8 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 /**
  * Class EnergySaverMain starts the gui as well as sets the look and feel to metal.
  *
- * @author Keegan Kell
- * @author Lola Howell
+ * @author Darren Carpenter
  * @version 8 June 2017
  */
 public final class EnergySaverMain {

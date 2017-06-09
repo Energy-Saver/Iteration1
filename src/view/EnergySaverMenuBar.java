@@ -27,8 +27,6 @@ import javax.swing.JOptionPane;
  *
  * @author Keegan Kell
  * @author Lola Howell
- * @author Darren Carpenter
- * @author Alex Smith
  * @version 8 June 2017
  */
 public class EnergySaverMenuBar extends JMenuBar {
