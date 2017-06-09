@@ -1,10 +1,9 @@
 /**
- * TCSS 360 - Iteration 1: Product v0.1
+ * TCSS 360 - Deliverable 3
  */
 
 package test;
 
-//import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import model.*;
@@ -14,12 +13,8 @@ import org.junit.Test;
 /**
  * Tests of the User class.
  *
- * @author Alex Smith
- * @author Darren Carpenter
  * @author Nikolai Carlson
- * @author Keegan Kell
- * @author Lola Howell
- * @version 16 April 2016 - Iteration 1
+ * @version 8 June 2017
  */
 public class UserTest {
     /** A User to use in the tests. */
@@ -48,16 +43,6 @@ public class UserTest {
     public void testEmail() {
         assertEquals("johndoe@gmail.com", myUser.getEmail());
     }
-
-    /*
-     * Test method for default user constructed password.
-     */
-    //@Test
-    //public void testPassword() {
-    //    String pw = "superSecret";
-    //    System.out.println();
-    //    assertArrayEquals(pw.toCharArray(), myUser.getPassword());
-    //}
 
     /**
      * Test method for {@link User#toString()}.

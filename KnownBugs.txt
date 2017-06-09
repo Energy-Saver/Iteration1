@@ -16,3 +16,7 @@ in 'continue' mode (guest user), 'save project' should not be offered or it shou
 graph labels may become too long for the space available if user has many lights
 
 mouse active components should be set once a panel is drawn
+
+invalid login credentials are displayed to System.out, not gui displayed
+
+imported/exported user notification displayed to System.out, not gui displayed

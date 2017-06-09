@@ -3,7 +3,6 @@
  */
 package view;
 
-import model.*;
 import java.awt.EventQueue;
 
 import javax.swing.UIManager;

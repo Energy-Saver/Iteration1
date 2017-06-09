@@ -1,3 +1,7 @@
+/**
+ * TCSS 360 - Deliverable 3
+ */
+
 package test;
 
 import static org.junit.Assert.*;
@@ -9,10 +13,10 @@ import org.junit.Test;
 import model.Project;
 
 /**
- * @author Nikolai Carlson
- * 
- * This class is testing the methods in the Project class in the model package
+ * Tests of the Project class.
  *
+ * @author Nikolai Carlson
+ * @version 8 June 2017
  */
 public class ProjectTest {
 	/** The project I will be using in all of my tests. */
@@ -20,7 +24,6 @@ public class ProjectTest {
 
 	/**
 	 * Nothing to set up here, unsure if I can get rid of it and everything will still work.
-	 * 
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
@@ -29,7 +32,6 @@ public class ProjectTest {
 
 	/**
 	 * Sets up the project to its default state before every test.
-	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
